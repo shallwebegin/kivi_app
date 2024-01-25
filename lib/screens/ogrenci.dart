@@ -7,10 +7,12 @@ import 'package:kivi_app/widgets/lesson_drawer.dart';
 final _firebase = FirebaseAuth.instance;
 
 class OgrenciSayfasi extends StatelessWidget {
+  const OgrenciSayfasi({super.key});
+  void _setScreen(String identifier) {}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MainDrawer(),
+      drawer: MainDrawer(onSelectScreen: _setScreen),
       appBar: AppBar(
         title: Text('Profil Ekranı'),
       ),

@@ -2,9 +2,12 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:kivi_app/ogrenci.dart';
+
+import 'package:kivi_app/screens/homepage.dart';
+import 'package:kivi_app/screens/ogrenci.dart';
+
 import 'package:kivi_app/widgets/kullanici_image_picker.dart';
-import 'package:kivi_app/yonetici.dart';
+import 'package:kivi_app/screens/yonetici.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kivi_app/credential.dart';
+import 'package:kivi_app/screens/credential.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});

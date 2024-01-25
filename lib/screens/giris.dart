@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kivi_app/welcome.dart';
+import 'package:kivi_app/screens/welcome.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
