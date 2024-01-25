@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "496967281351",
+    "project_id": "kivilerce-app-project",
+    "storage_bucket": "kivilerce-app-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:496967281351:android:1a38f66a35441466e1ece2",
+        "android_client_info": {
+          "package_name": "com.example.kivi_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2BRuu_WOgRUaS7pOiAfeBXjidkmkZ7iY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
