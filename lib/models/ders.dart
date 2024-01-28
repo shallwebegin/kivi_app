@@ -1,5 +1,5 @@
 enum Complexity {
-  kolay,
+  basit,
   orta,
   zor,
 }
