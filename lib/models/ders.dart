@@ -1,13 +1,11 @@
 enum Complexity {
-  simple,
-  challenging,
-  hard,
+  kolay,
+  orta,
+  zor,
 }
 
 enum Affordability {
   affordable,
-  pricey,
-  luxurious,
 }
 
 class Ders {
@@ -20,10 +18,9 @@ class Ders {
     required this.cevaplar,
     required this.duration,
     required this.complexity,
-    required this.isGlutenFree,
-    required this.isLactoseFree,
-    required this.isVegan,
-    required this.isVegetarian,
+    required this.zor,
+    required this.orta,
+    required this.kolay,
   });
 
   final String id;
@@ -35,8 +32,7 @@ class Ders {
   final int duration;
   final Complexity complexity;
 
-  final bool isGlutenFree;
-  final bool isLactoseFree;
-  final bool isVegan;
-  final bool isVegetarian;
+  final bool zor;
+  final bool orta;
+  final bool kolay;
 }

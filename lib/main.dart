@@ -2,9 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
-import 'package:kivi_app/screens/credential.dart';
-import 'package:kivi_app/screens/giris.dart';
-import 'package:kivi_app/screens/ogrenci.dart';
+
+import 'package:kivi_app/screens/home_page.dart';
+import 'package:kivi_app/screens/splash.dart';
+
+import 'package:kivi_app/screens/start_screen.dart';
+
 import 'firebase_options.dart';
 
 void main() async {
@@ -26,9 +29,20 @@ class App extends StatelessWidget {
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(
             brightness: Brightness.dark,
-            seedColor: Color.fromARGB(255, 2, 184, 32),
+            seedColor: const Color.fromARGB(255, 2, 184, 32),
           )),
-      home: const OgrenciSayfasi(),
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const SplashScreen();
+          }
+          if (snapshot.hasData) {
+            return const HomePageScreen();
+          }
+          return const StartScreen();
+        },
+      ),
     );
   }
 }
