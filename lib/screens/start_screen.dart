@@ -12,19 +12,18 @@ class StartScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/images/Group.png'),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              'Kivi App',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge!
-                  .copyWith(color: Theme.of(context).colorScheme.background),
+            Container(
+              child: Image.asset('assets/images/Group.png'),
             ),
             const SizedBox(
-              height: 10,
+              height: 20,
+            ),
+            const Text(
+              'KiviApp',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(
+              height: 20,
             ),
             TextButton.icon(
               onPressed: () {

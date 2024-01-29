@@ -6,9 +6,7 @@ class YoneticiScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text('YONETİCİ'),
-      ),
+      body: Center(child: Text('Yonetici')),
     );
   }
 }

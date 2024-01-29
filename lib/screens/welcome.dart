@@ -13,12 +13,13 @@ class WelcomeScreen extends StatelessWidget {
             opacity: 0.4,
             child: Image.asset(
               'assets/images/kivi.jpg',
-              fit: BoxFit.cover,
               height: double.infinity,
+              fit: BoxFit.cover,
+              width: double.infinity,
             ),
           ),
           Positioned(
-            bottom: 400,
+            bottom: 330,
             left: 0,
             right: 0,
             child: Column(
@@ -26,19 +27,28 @@ class WelcomeScreen extends StatelessWidget {
                 Hero(
                   tag: 'logo',
                   child: Container(
-                    height: 80,
+                    height: 60,
                     child: Image.asset('assets/images/Group.png'),
                   ),
                 ),
+                const SizedBox(
+                  height: 20,
+                ),
                 Text(
-                  'Welcome to Kivi App',
+                  'Welcome to KiviApp',
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
                       color: Theme.of(context).colorScheme.onBackground),
                 ),
+                const SizedBox(
+                  height: 20,
+                ),
                 Text(
-                  'Welcome to Kivi App',
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  'Lets Begin',
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       color: Theme.of(context).colorScheme.onBackground),
+                ),
+                const SizedBox(
+                  height: 20,
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -48,9 +58,6 @@ class WelcomeScreen extends StatelessWidget {
                       ),
                     );
                   },
-                  style: ElevatedButton.styleFrom(
-                    fixedSize: const Size(220, 4),
-                  ),
                   child: const Text('Get Started'),
                 ),
               ],
