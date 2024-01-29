@@ -50,19 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAY-3ZcRn00a1XScg1_iJDDo9TvrUOKRtY',
-    appId: '1:732918776348:android:b437b3a937efc86de2d5d9',
-    messagingSenderId: '732918776348',
-    projectId: 'kivi-soru-bankasi',
-    storageBucket: 'kivi-soru-bankasi.appspot.com',
+    apiKey: 'AIzaSyA2BRuu_WOgRUaS7pOiAfeBXjidkmkZ7iY',
+    appId: '1:496967281351:android:1a38f66a35441466e1ece2',
+    messagingSenderId: '496967281351',
+    projectId: 'kivilerce-app-project',
+    storageBucket: 'kivilerce-app-project.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCHXD7TZPBC6LoLW8P1fujsh41JzT1NWHM',
-    appId: '1:732918776348:ios:fadf2d5b2d0f9a5ae2d5d9',
-    messagingSenderId: '732918776348',
-    projectId: 'kivi-soru-bankasi',
-    storageBucket: 'kivi-soru-bankasi.appspot.com',
-    iosBundleId: 'com.example.kivisorubankasi',
+    apiKey: 'AIzaSyC38KN3QuoRsVcGAWSmkNAZo1LXLFjs6ZY',
+    appId: '1:496967281351:ios:48bd8637a5bf8808e1ece2',
+    messagingSenderId: '496967281351',
+    projectId: 'kivilerce-app-project',
+    storageBucket: 'kivilerce-app-project.appspot.com',
+    iosBundleId: 'com.example.kiviApp',
   );
 }
