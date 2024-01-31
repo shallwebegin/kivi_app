@@ -12,20 +12,18 @@ class StartScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              child: Image.asset('assets/images/Group.png'),
-            ),
+            Image.asset('assets/images/Group.png'),
             const SizedBox(
               height: 20,
             ),
             const Text(
               'KiviApp',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
             ),
             const SizedBox(
               height: 20,
             ),
-            TextButton.icon(
+            ElevatedButton(
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
@@ -33,12 +31,11 @@ class StartScreen extends StatelessWidget {
                   ),
                 );
               },
-              style: TextButton.styleFrom(
-                  backgroundColor:
-                      Theme.of(context).colorScheme.primaryContainer),
-              icon: const Icon(Icons.start),
-              label: const Text('Start'),
-            ),
+              style: ElevatedButton.styleFrom(
+                fixedSize: const Size(150, 22),
+              ),
+              child: const Text('Start'),
+            )
           ],
         ),
       ),

@@ -7,63 +7,49 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Opacity(
-            opacity: 0.4,
-            child: Image.asset(
-              'assets/images/kivi.jpg',
-              height: double.infinity,
-              fit: BoxFit.cover,
-              width: double.infinity,
+      backgroundColor: Theme.of(context).colorScheme.primary,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Hero(
+              tag: 'logo',
+              child: Container(
+                child: Image.asset('assets/images/Group.png'),
+              ),
             ),
-          ),
-          Positioned(
-            bottom: 330,
-            left: 0,
-            right: 0,
-            child: Column(
-              children: [
-                Hero(
-                  tag: 'logo',
-                  child: Container(
-                    height: 60,
-                    child: Image.asset('assets/images/Group.png'),
+            const SizedBox(
+              height: 20,
+            ),
+            const Text(
+              'Welcome to KiviApp',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            const Text(
+              'Lets Begin',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const CredentialScreen(),
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  'Welcome to KiviApp',
-                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      color: Theme.of(context).colorScheme.onBackground),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  'Lets Begin',
-                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      color: Theme.of(context).colorScheme.onBackground),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const CredentialScreen(),
-                      ),
-                    );
-                  },
-                  child: const Text('Get Started'),
-                ),
-              ],
-            ),
-          ),
-        ],
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                fixedSize: const Size(150, 22),
+              ),
+              child: const Text('Start'),
+            )
+          ],
+        ),
       ),
     );
   }

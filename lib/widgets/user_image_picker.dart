@@ -22,7 +22,6 @@ class _UserImagePickerState extends State<UserImagePicker> {
     setState(() {
       _pickedImageFile = File(pickedImage.path);
     });
-    widget.onPickImage(_pickedImageFile!);
   }
 
   @override
@@ -35,7 +34,7 @@ class _UserImagePickerState extends State<UserImagePicker> {
           foregroundImage:
               _pickedImageFile != null ? FileImage(_pickedImageFile!) : null,
         ),
-        ElevatedButton.icon(
+        TextButton.icon(
           onPressed: pickImage,
           icon: const Icon(Icons.image),
           label: const Text('Add image'),
