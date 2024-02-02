@@ -1,9 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kivi_app/screens/start_screen.dart';
-
 import 'firebase_options.dart';
 
 void main() async {
@@ -25,7 +24,7 @@ class App extends StatelessWidget {
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(
             brightness: Brightness.dark,
-            seedColor: const Color.fromARGB(255, 2, 184, 32),
+            seedColor: const Color.fromARGB(255, 157, 213, 25),
           )),
       home: const StartScreen(),
     );

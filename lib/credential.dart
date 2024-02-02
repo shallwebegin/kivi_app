@@ -1,14 +1,11 @@
-// ignore_for_file: sized_box_for_whitespace, use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously
 
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:kivi_app/screens/adminastor.dart';
-import 'package:kivi_app/screens/categories.dart';
-import 'package:kivi_app/screens/student.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kivi_app/widgets/user_image_picker.dart';
 
 class CredentialScreen extends StatefulWidget {
@@ -21,11 +18,12 @@ class CredentialScreen extends StatefulWidget {
 class _CredentialScreenState extends State<CredentialScreen> {
   var isLogin = true;
   var _enteredEmail = '';
-  var _enteredPassword = '';
   var _enteredUsername = '';
-  var isAuthentication = false;
+  var _enteredPassword = '';
   var isManager = false;
+  var isAuthentication = false;
   final _form = GlobalKey<FormState>();
+  File? pickImage;
 
   void credentialUser() async {
     final isValid = _form.currentState!.validate();
@@ -43,15 +41,7 @@ class _CredentialScreenState extends State<CredentialScreen> {
                 email: _enteredEmail, password: _enteredPassword);
         if (isManager && !isUserManager(userCredential.user!)) {
           showAlertDialog(
-              context, 'Hata', 'Yonetici Yetkisine Sahip Değilsiniz');
-        } else {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => isManager
-                  ? const AdminastorPage()
-                  : const CategoriesScreen(mevcutDersler: []),
-            ),
-          );
+              context, 'Error', 'You dont have administrator permission ');
         }
       } else {
         final userCredential = await FirebaseAuth.instance
@@ -62,7 +52,7 @@ class _CredentialScreenState extends State<CredentialScreen> {
             .child('user_images')
             .child('${userCredential.user!.uid}.jpg');
         await storageRef.putFile(
-          pickedImage!,
+          pickImage!,
           SettableMetadata(contentType: 'image/jpg'),
         );
         final imageUrl = await storageRef.getDownloadURL();
@@ -76,9 +66,10 @@ class _CredentialScreenState extends State<CredentialScreen> {
         });
       }
     } on FirebaseAuthException catch (error) {
-      if (error.code == 'email-already-in-use') {
-        //....
-      }
+      if (error.code == 'email-already-in-use' ||
+          error.code == 'wrong-password' ||
+          error.code == 'invalid-email') {}
+      showAlertDialog(context, 'Error', 'Please check you information');
       ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -108,14 +99,13 @@ class _CredentialScreenState extends State<CredentialScreen> {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: const Text('Tamam'),
+                child: const Text('Okay'),
               ),
             ],
           );
         });
   }
 
-  File? pickedImage;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -123,13 +113,11 @@ class _CredentialScreenState extends State<CredentialScreen> {
       body: Stack(
         children: [
           Opacity(
-            opacity: 0.77,
-            child: Container(
-              child: Image.asset(
-                'assets/images/kivi.jpg',
-                height: double.infinity,
-                fit: BoxFit.cover,
-              ),
+            opacity: 0.8,
+            child: Image.asset(
+              'assets/images/kivi.jpg',
+              height: double.infinity,
+              fit: BoxFit.cover,
             ),
           ),
           Center(
@@ -140,32 +128,24 @@ class _CredentialScreenState extends State<CredentialScreen> {
                 child: Form(
                   key: _form,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Hero(
-                        tag: 'logo',
-                        child: Container(
-                          height: 100,
-                          child: Image.asset('assets/images/Group.png'),
-                        ),
-                      ),
                       if (!isLogin)
                         UserImagePicker(
                           onPickImage: (image) {
-                            pickedImage = image;
+                            pickImage = image;
                           },
                         ),
                       TextFormField(
                         decoration:
                             const InputDecoration(labelText: 'Email Address'),
-                        keyboardType: TextInputType.emailAddress,
-                        textCapitalization: TextCapitalization.none,
                         autocorrect: false,
+                        textCapitalization: TextCapitalization.none,
+                        keyboardType: TextInputType.emailAddress,
                         validator: (value) {
                           if (value == null ||
                               value.trim().isEmpty ||
                               !value.contains('@')) {
-                            return 'Lütfen Düzgün bir Mail adresi giriniz';
+                            return 'Please check your Email Address';
                           }
                           return null;
                         },
@@ -177,10 +157,9 @@ class _CredentialScreenState extends State<CredentialScreen> {
                         TextFormField(
                           decoration:
                               const InputDecoration(labelText: 'Username'),
-                          autocorrect: false,
                           validator: (value) {
                             if (value == null || value.trim().length < 4) {
-                              return 'Lütfen Düzgün bir Username giriniz';
+                              return 'Please check your Username';
                             }
                             return null;
                           },
@@ -189,12 +168,12 @@ class _CredentialScreenState extends State<CredentialScreen> {
                           },
                         ),
                       TextFormField(
+                        obscureText: true,
                         decoration:
                             const InputDecoration(labelText: 'Password'),
-                        obscureText: true,
                         validator: (value) {
                           if (value == null || value.trim().length < 6) {
-                            return 'Lütfen Düzgün bir password giriniz';
+                            return 'Please check your Password';
                           }
                           return null;
                         },
@@ -207,12 +186,8 @@ class _CredentialScreenState extends State<CredentialScreen> {
                       ),
                       if (isAuthentication) const CircularProgressIndicator(),
                       if (!isAuthentication)
-                        ElevatedButton(
+                        TextButton(
                           onPressed: credentialUser,
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Theme.of(context)
-                                  .colorScheme
-                                  .primaryContainer),
                           child: Text(isLogin ? 'Login' : 'SignUp'),
                         ),
                       TextButton(
@@ -227,16 +202,13 @@ class _CredentialScreenState extends State<CredentialScreen> {
                       ),
                       if (isLogin)
                         CheckboxListTile(
-                          value: isManager,
-                          title: const Text('Yonetici Giriş'),
-                          onChanged: (value) {
-                            setState(
-                              () {
+                            value: isManager,
+                            title: const Text('Admin Login'),
+                            onChanged: (value) {
+                              setState(() {
                                 isManager = value!;
-                              },
-                            );
-                          },
-                        ),
+                              });
+                            })
                     ],
                   ),
                 ),
