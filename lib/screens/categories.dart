@@ -10,7 +10,7 @@ class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({super.key, required this.availableLesson});
   final List<Ders> availableLesson;
   void selectCategory(BuildContext context, Category category) {
-    final filteredLesson = dersKonulari
+    final filteredLesson = availableLesson
         .where(
           (ders) => ders.categories.contains(category.id),
         )

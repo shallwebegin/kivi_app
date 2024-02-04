@@ -32,7 +32,7 @@ class FiltersScreen extends ConsumerWidget {
                   ),
             ),
             subtitle: Text(
-              'Orta',
+              'Zor',
               style: Theme.of(context).textTheme.labelMedium!.copyWith(
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
@@ -54,7 +54,7 @@ class FiltersScreen extends ConsumerWidget {
                   ),
             ),
             subtitle: Text(
-              'Only include lactose-free meals.',
+              'Orta.',
               style: Theme.of(context).textTheme.labelMedium!.copyWith(
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
@@ -76,7 +76,7 @@ class FiltersScreen extends ConsumerWidget {
                   ),
             ),
             subtitle: Text(
-              'Only include vegetarian meals.',
+              'Kolay',
               style: Theme.of(context).textTheme.labelMedium!.copyWith(
                     color: Theme.of(context).colorScheme.onBackground,
                   ),

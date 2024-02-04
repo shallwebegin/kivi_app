@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kivi_app/screens/student.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key, required this.onSelectScreen});
@@ -13,7 +14,7 @@ class MainDrawer extends StatelessWidget {
             padding: const EdgeInsets.all(20),
             child: Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.book,
                   size: 40,
                 ),
@@ -54,7 +55,13 @@ class MainDrawer extends StatelessWidget {
               'Profile',
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const StudentScreen(),
+                ),
+              );
+            },
           )
         ],
       ),
