@@ -2,10 +2,13 @@
 
 import 'dart:io';
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
+import 'package:kivi_app/screens/admin.dart';
+
+import 'package:kivi_app/screens/tabs.dart';
 import 'package:kivi_app/widgets/user_image_picker.dart';
 
 class CredentialScreen extends StatefulWidget {
@@ -16,14 +19,15 @@ class CredentialScreen extends StatefulWidget {
 }
 
 class _CredentialScreenState extends State<CredentialScreen> {
+  final _form = GlobalKey<FormState>();
   var isLogin = true;
   var _enteredEmail = '';
-  var _enteredUsername = '';
   var _enteredPassword = '';
-  var isManager = false;
+  var _enteredUsername = '';
+
   var isAuthentication = false;
-  final _form = GlobalKey<FormState>();
-  File? pickImage;
+  var isManager = false;
+  File? pickedImage;
 
   void credentialUser() async {
     final isValid = _form.currentState!.validate();
@@ -41,7 +45,14 @@ class _CredentialScreenState extends State<CredentialScreen> {
                 email: _enteredEmail, password: _enteredPassword);
         if (isManager && !isUserManager(userCredential.user!)) {
           showAlertDialog(
-              context, 'Error', 'You dont have administrator permission ');
+              context, 'Error', 'You do not have administrative authority');
+        } else {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) =>
+                  isManager ? const AdminScreen() : const TabsScreen(),
+            ),
+          );
         }
       } else {
         final userCredential = await FirebaseAuth.instance
@@ -52,7 +63,7 @@ class _CredentialScreenState extends State<CredentialScreen> {
             .child('user_images')
             .child('${userCredential.user!.uid}.jpg');
         await storageRef.putFile(
-          pickImage!,
+          pickedImage!,
           SettableMetadata(contentType: 'image/jpg'),
         );
         final imageUrl = await storageRef.getDownloadURL();
@@ -68,8 +79,9 @@ class _CredentialScreenState extends State<CredentialScreen> {
     } on FirebaseAuthException catch (error) {
       if (error.code == 'email-already-in-use' ||
           error.code == 'wrong-password' ||
-          error.code == 'invalid-email') {}
-      showAlertDialog(context, 'Error', 'Please check you information');
+          error.code == 'invalid-email') {
+        showAlertDialog(context, 'Error', 'Please check your information');
+      }
       ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -87,23 +99,24 @@ class _CredentialScreenState extends State<CredentialScreen> {
     return user.email != null && user.email!.contains('@yonetici.com');
   }
 
-  void showAlertDialog(BuildContext context, String title, String message) {
+  void showAlertDialog(BuildContext context, String title, String messsage) {
     showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text(title),
-            content: Text(message),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('Okay'),
-              ),
-            ],
-          );
-        });
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(messsage),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Okay'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -132,15 +145,15 @@ class _CredentialScreenState extends State<CredentialScreen> {
                       if (!isLogin)
                         UserImagePicker(
                           onPickImage: (image) {
-                            pickImage = image;
+                            pickedImage = image;
                           },
                         ),
                       TextFormField(
                         decoration:
                             const InputDecoration(labelText: 'Email Address'),
                         autocorrect: false,
-                        textCapitalization: TextCapitalization.none,
                         keyboardType: TextInputType.emailAddress,
+                        textCapitalization: TextCapitalization.none,
                         validator: (value) {
                           if (value == null ||
                               value.trim().isEmpty ||
@@ -197,18 +210,19 @@ class _CredentialScreenState extends State<CredentialScreen> {
                           });
                         },
                         child: Text(isLogin
-                            ? 'Create an account'
+                            ? 'Create an Account'
                             : 'I already have an account'),
                       ),
                       if (isLogin)
                         CheckboxListTile(
-                            value: isManager,
-                            title: const Text('Admin Login'),
-                            onChanged: (value) {
-                              setState(() {
-                                isManager = value!;
-                              });
-                            })
+                          title: const Text('Admin Login'),
+                          value: isManager,
+                          onChanged: (value) {
+                            setState(() {
+                              isManager = value!;
+                            });
+                          },
+                        ),
                     ],
                   ),
                 ),

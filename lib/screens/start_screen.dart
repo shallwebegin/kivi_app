@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kivi_app/credential.dart';
+import 'package:kivi_app/screens/credential.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
@@ -14,7 +14,7 @@ class StartScreen extends StatelessWidget {
           children: [
             Image.asset(
               'assets/images/kivilerce.jpg',
-              height: 180,
+              height: 200,
             ),
             const SizedBox(
               height: 20,
