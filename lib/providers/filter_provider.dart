@@ -1,20 +1,20 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kivi_app/providers/lesson_provider.dart';
 
-enum Filter { zor, orta, kolay }
+enum Filters { zor, orta, kolay }
 
-class FilterLessonNotifier extends StateNotifier<Map<Filter, bool>> {
+class FilterLessonNotifier extends StateNotifier<Map<Filters, bool>> {
   FilterLessonNotifier()
       : super({
-          Filter.zor: false,
-          Filter.orta: false,
-          Filter.kolay: false,
+          Filters.zor: false,
+          Filters.orta: false,
+          Filters.kolay: false,
         });
-  void setFilters(Map<Filter, bool> choosenFilter) {
+  void setFilters(Map<Filters, bool> choosenFilter) {
     state = choosenFilter;
   }
 
-  void setFilter(Filter filter, bool isActive) {
+  void setFilter(Filters filter, bool isActive) {
     state = {
       ...state,
       filter: isActive,
@@ -23,19 +23,19 @@ class FilterLessonNotifier extends StateNotifier<Map<Filter, bool>> {
 }
 
 final filterProvider =
-    StateNotifierProvider<FilterLessonNotifier, Map<Filter, bool>>(
+    StateNotifierProvider<FilterLessonNotifier, Map<Filters, bool>>(
         (ref) => FilterLessonNotifier());
 final filteredLessonProvider = Provider((ref) {
   final lessons = ref.watch(lessonProvider);
   final activeFilters = ref.watch(filterProvider);
   return lessons.where((ders) {
-    if (activeFilters[Filter.zor]! && !ders.zor) {
+    if (activeFilters[Filters.zor]! && !ders.zor) {
       return false;
     }
-    if (activeFilters[Filter.orta]! && !ders.orta) {
+    if (activeFilters[Filters.orta]! && !ders.orta) {
       return false;
     }
-    if (activeFilters[Filter.kolay]! && !ders.kolay) {
+    if (activeFilters[Filters.kolay]! && !ders.kolay) {
       return false;
     }
     return true;

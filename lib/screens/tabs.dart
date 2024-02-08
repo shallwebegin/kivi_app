@@ -1,21 +1,19 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kivi_app/providers/favorite_provider.dart';
-
+import 'package:kivi_app/providers/filter_provider.dart';
 import 'package:kivi_app/screens/categories.dart';
+import 'package:kivi_app/screens/credential.dart';
 import 'package:kivi_app/screens/filters.dart';
-
 import 'package:kivi_app/screens/lesson.dart';
-
 import 'package:kivi_app/widgets/main_drawer.dart';
 
-import 'package:kivi_app/providers/filters_provider.dart';
-
 const kInitialFilters = {
-  Filter.zor: false,
-  Filter.orta: false,
-  Filter.kolay: false,
+  Filters.zor: false,
+  Filters.orta: false,
+  Filters.kolay: false,
 };
 
 class TabsScreen extends ConsumerStatefulWidget {
@@ -33,6 +31,11 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
   void _selectPage(int index) {
     setState(() {
       _selectedPageIndex = index;
+      if (index == 1) {
+        final favoriteLesson = ref.watch(favoriteProvider);
+        addFavoriteToFirestore(FirebaseAuth.instance.currentUser!.uid,
+            favoriteLesson.map((lesson) => lesson.id).toList());
+      }
     });
   }
 
@@ -45,6 +48,16 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
         ),
       );
     }
+  }
+
+  Future<void> addFavoriteToFirestore(
+      String userId, List<String> favoriteLessonIds) async {
+    final firestore = FirebaseFirestore.instance;
+    await firestore.collection('favorites').doc(userId).set({
+      'email': FirebaseAuth.instance.currentUser!.email,
+      'username': FirebaseAuth.instance.currentUser!.displayName,
+      'favorites': favoriteLessonIds,
+    });
   }
 
   @override
@@ -71,6 +84,11 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
           IconButton(
             onPressed: () {
               FirebaseAuth.instance.signOut();
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => const CredentialScreen(),
+                ),
+              );
             },
             icon: const Icon(Icons.logout),
           ),

@@ -13,13 +13,17 @@ class CategoryGridItem extends StatelessWidget {
       splashColor: Colors.white,
       borderRadius: BorderRadius.circular(16),
       child: Container(
-        padding: const EdgeInsets.all(16),
-        margin: const EdgeInsets.all(6),
+        padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
           gradient: LinearGradient(
-            colors: [category.color, category.color],
+            colors: [
+              category.color.withOpacity(0.7),
+              category.color,
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
+          borderRadius: BorderRadius.circular(15),
         ),
         child: Text(
           category.title,

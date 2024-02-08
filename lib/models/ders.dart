@@ -1,11 +1,7 @@
 enum Complexity {
-  basit,
+  kolay,
   orta,
   zor,
-}
-
-enum Affordability {
-  affordable,
 }
 
 class Ders {

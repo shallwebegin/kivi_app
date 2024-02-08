@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // import 'package:meals/screens/tabs.dart';
 // import 'package:meals/widgets/main_drawer.dart';
-import 'package:kivi_app/providers/filters_provider.dart';
+import 'package:kivi_app/providers/filter_provider.dart';
 
 class FiltersScreen extends ConsumerWidget {
   const FiltersScreen({super.key});
@@ -19,11 +19,11 @@ class FiltersScreen extends ConsumerWidget {
       body: Column(
         children: [
           SwitchListTile(
-            value: activeFilters[Filter.zor]!,
+            value: activeFilters[Filters.zor]!,
             onChanged: (isChecked) {
               ref
                   .read(filterProvider.notifier)
-                  .setFilter(Filter.zor, isChecked);
+                  .setFilter(Filters.zor, isChecked);
             },
             title: Text(
               'Zor',
@@ -41,11 +41,11 @@ class FiltersScreen extends ConsumerWidget {
             contentPadding: const EdgeInsets.only(left: 34, right: 22),
           ),
           SwitchListTile(
-            value: activeFilters[Filter.orta]!,
+            value: activeFilters[Filters.orta]!,
             onChanged: (isChecked) {
               ref
                   .read(filterProvider.notifier)
-                  .setFilter(Filter.orta, isChecked);
+                  .setFilter(Filters.orta, isChecked);
             },
             title: Text(
               'Orta',
@@ -63,11 +63,11 @@ class FiltersScreen extends ConsumerWidget {
             contentPadding: const EdgeInsets.only(left: 34, right: 22),
           ),
           SwitchListTile(
-            value: activeFilters[Filter.kolay]!,
+            value: activeFilters[Filters.kolay]!,
             onChanged: (isChecked) {
               ref
                   .read(filterProvider.notifier)
-                  .setFilter(Filter.kolay, isChecked);
+                  .setFilter(Filters.kolay, isChecked);
             },
             title: Text(
               'Kolay',

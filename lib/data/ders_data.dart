@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:kivi_app/models/ders.dart';
 import 'package:kivi_app/models/kategori.dart';
 
-// Constants in Dart should be written in lowerCamelcase.
 const mevcutKategoriler = [
   Category(
     id: 'c1',
@@ -112,7 +111,7 @@ const dersKonulari = [
       'c2',
     ],
     title: 'Genel Edebiyat',
-    complexity: Complexity.basit,
+    complexity: Complexity.kolay,
     imageUrl:
         'https://evrimagaci.org/public/content_media/5d97474c767b86b103b9a3236ab8b2e3.jpg',
     duration: 45,
@@ -249,7 +248,7 @@ const dersKonulari = [
       'c4',
     ],
     title: 'Kimyasal Bağlar',
-    complexity: Complexity.basit,
+    complexity: Complexity.kolay,
     imageUrl:
         'https://ozelgobeklitepekoleji.com/tema/genel/uploads/egitim_birimleri/kimya.jpg',
     duration: 60,
@@ -351,7 +350,7 @@ const dersKonulari = [
       'c5',
     ],
     title: 'Evrim',
-    complexity: Complexity.basit,
+    complexity: Complexity.kolay,
     imageUrl:
         'https://atabeyy.com/wp-content/uploads/2018/12/biyoloji-ozel-ders-1200x673.jpg',
     duration: 45,
@@ -389,7 +388,7 @@ const dersKonulari = [
       'c6',
     ],
     title: 'Genel Tarih',
-    complexity: Complexity.basit,
+    complexity: Complexity.kolay,
     imageUrl:
         'https://www.isler.com.tr/panel/img//blog/24736269322962030340tyt-tarih-netleri-nasil-artar.jpeg',
     duration: 45,

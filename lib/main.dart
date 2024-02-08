@@ -1,10 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kivi_app/screens/categories.dart';
-import 'package:kivi_app/screens/start_screen.dart';
+
 import 'package:kivi_app/screens/tabs.dart';
+
 import 'firebase_options.dart';
 
 void main() async {
@@ -28,7 +27,7 @@ class App extends StatelessWidget {
             brightness: Brightness.dark,
             seedColor: const Color.fromARGB(255, 157, 213, 25),
           )),
-      home: const StartScreen(),
+      home: const TabsScreen(),
     );
   }
 }

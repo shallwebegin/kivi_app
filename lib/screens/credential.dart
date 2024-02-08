@@ -125,12 +125,11 @@ class _CredentialScreenState extends State<CredentialScreen> {
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          Opacity(
-            opacity: 0.8,
-            child: Image.asset(
-              'assets/images/kivi.jpg',
-              height: double.infinity,
-              fit: BoxFit.cover,
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.black, Colors.white],
+              ),
             ),
           ),
           Center(
