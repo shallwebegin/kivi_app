@@ -26,6 +26,18 @@ class _UserImagePickerState extends State<UserImagePicker> {
     widget.onPickImage(_pickedImageFile!);
   }
 
+  void addImage() async {
+    final pickedImage = await ImagePicker().pickImage(
+        source: ImageSource.gallery, imageQuality: 50, maxWidth: 150);
+    if (pickedImage == null) {
+      return;
+    }
+    setState(() {
+      _pickedImageFile = File(pickedImage.path);
+    });
+    widget.onPickImage(_pickedImageFile!);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -36,10 +48,20 @@ class _UserImagePickerState extends State<UserImagePicker> {
           foregroundImage:
               _pickedImageFile != null ? FileImage(_pickedImageFile!) : null,
         ),
-        TextButton.icon(
-          onPressed: pickImage,
-          icon: const Icon(Icons.image),
-          label: const Text('Add image'),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextButton.icon(
+              onPressed: pickImage,
+              icon: const Icon(Icons.camera_alt),
+              label: const Text('Add image'),
+            ),
+            TextButton.icon(
+              onPressed: addImage,
+              icon: const Icon(Icons.image),
+              label: const Text('pick image'),
+            ),
+          ],
         ),
       ],
     );

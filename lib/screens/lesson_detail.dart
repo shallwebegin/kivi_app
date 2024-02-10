@@ -14,9 +14,9 @@ class LessonDetailScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final favoriteMeals = ref.watch(favoriteProvider);
+    final favoriteLessons = ref.watch(favoriteProvider);
 
-    final isFavorite = favoriteMeals.contains(ders);
+    final isFavorite = favoriteLessons.contains(ders);
 
     return Scaffold(
       appBar: AppBar(title: Text(ders.title), actions: [
@@ -28,8 +28,9 @@ class LessonDetailScreen extends ConsumerWidget {
             ScaffoldMessenger.of(context).clearSnackBars();
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(
-                    wasAdded ? 'Meal added as a favorite.' : 'Meal removed.'),
+                content: Text(wasAdded
+                    ? 'Lesson added as a favorite.'
+                    : 'Lesson removed.'),
               ),
             );
           },

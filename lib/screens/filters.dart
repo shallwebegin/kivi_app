@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// import 'package:meals/screens/tabs.dart';
-// import 'package:meals/widgets/main_drawer.dart';
 import 'package:kivi_app/providers/filter_provider.dart';
 
 class FiltersScreen extends ConsumerWidget {

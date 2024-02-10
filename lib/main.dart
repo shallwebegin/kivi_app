@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kivi_app/screens/admin.dart';
 
-import 'package:kivi_app/widgets/student_list.dart';
+import 'package:kivi_app/screens/start_screen.dart';
 
 import 'firebase_options.dart';
 
@@ -28,7 +27,7 @@ class App extends StatelessWidget {
             brightness: Brightness.dark,
             seedColor: const Color.fromARGB(255, 131, 57, 0),
           )),
-      home: const AdminScreen(),
+      home: const StartScreen(),
     );
   }
 }
