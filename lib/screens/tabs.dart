@@ -53,7 +53,7 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
   Future<void> addFavoriteToFirestore(
       String userId, List<String> favoriteLessonIds) async {
     final firestore = FirebaseFirestore.instance;
-    await firestore.collection('favorites').doc(userId).set({
+    await firestore.collection('usersli').doc(userId).set({
       'email': FirebaseAuth.instance.currentUser!.email,
       'username': FirebaseAuth.instance.currentUser!.displayName,
       'favorites': favoriteLessonIds,

@@ -14,9 +14,9 @@ class Ders {
     required this.cevaplar,
     required this.duration,
     required this.complexity,
-    required this.zor,
-    required this.orta,
-    required this.kolay,
+    this.zor,
+    this.orta,
+    this.kolay,
   });
 
   final String id;
@@ -28,7 +28,7 @@ class Ders {
   final int duration;
   final Complexity complexity;
 
-  final bool zor;
-  final bool orta;
-  final bool kolay;
+  final bool? zor;
+  final bool? orta;
+  final bool? kolay;
 }

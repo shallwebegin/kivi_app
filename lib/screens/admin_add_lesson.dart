@@ -20,9 +20,7 @@ class _AddDersFormState extends State<AddDersForm> {
   late int duration;
   late List<String> sorular;
   late List<String> cevaplar;
-  late bool zor = false;
-  late bool orta = false;
-  late bool kolay = false;
+
   late Complexity complexity = Complexity.kolay;
   @override
   Widget build(BuildContext context) {
@@ -119,53 +117,29 @@ class _AddDersFormState extends State<AddDersForm> {
                 cevaplar = value!.split(',');
               },
             ),
-            DropdownButtonFormField(
-              value: complexity,
-              items: Complexity.values
-                  .map(
-                    (complexity) => DropdownMenuItem(
-                      value: complexity,
-                      child: Text(
-                        complexity.name.toString(),
+            Container(
+              width: 200,
+              child: DropdownButtonFormField(
+                value: complexity,
+                items: Complexity.values
+                    .map(
+                      (complexity) => DropdownMenuItem(
+                        value: complexity,
+                        child: Text(
+                          complexity.name.toString(),
+                        ),
                       ),
-                    ),
-                  )
-                  .toList(),
-              onChanged: (value) {
-                setState(() {
+                    )
+                    .toList(),
+                onChanged: (value) {
+                  setState(() {
+                    complexity = value!;
+                  });
+                },
+                onSaved: (value) {
                   complexity = value!;
-                });
-              },
-              onSaved: (value) {
-                complexity = value!;
-              },
-            ),
-            CheckboxListTile(
-              title: const Text('Zor'),
-              value: zor,
-              onChanged: (value) {
-                setState(() {
-                  zor = value!;
-                });
-              },
-            ),
-            CheckboxListTile(
-              title: const Text('Orta'),
-              value: orta,
-              onChanged: (value) {
-                setState(() {
-                  orta = value!;
-                });
-              },
-            ),
-            CheckboxListTile(
-              title: const Text('Kolay'),
-              value: kolay,
-              onChanged: (value) {
-                setState(() {
-                  kolay = value!;
-                });
-              },
+                },
+              ),
             ),
             ElevatedButton(
               onPressed: () {
@@ -181,9 +155,6 @@ class _AddDersFormState extends State<AddDersForm> {
                     cevaplar: cevaplar,
                     duration: duration,
                     complexity: complexity, // Karmaşıklık seviyesini ayarlayın
-                    zor: zor,
-                    orta: orta,
-                    kolay: kolay,
                   );
                   // Oluşturulan Ders nesnesini dışa aktarın
                   widget.onDersSubmitted(ders);
