@@ -123,113 +123,121 @@ class _CredentialScreenState extends State<CredentialScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Colors.black, Colors.white],
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+              colors: [Colors.blue, Colors.pink],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.black, Colors.white],
+                ),
               ),
             ),
-          ),
-          Center(
-            child: Card(
-              margin: const EdgeInsets.all(12),
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(16),
-                child: Form(
-                  key: _form,
-                  child: Column(
-                    children: [
-                      if (!isLogin)
-                        UserImagePicker(
-                          onPickImage: (image) {
-                            pickedImage = image;
-                          },
-                        ),
-                      TextFormField(
-                        decoration:
-                            const InputDecoration(labelText: 'Email Address'),
-                        autocorrect: false,
-                        keyboardType: TextInputType.emailAddress,
-                        textCapitalization: TextCapitalization.none,
-                        validator: (value) {
-                          if (value == null ||
-                              value.trim().isEmpty ||
-                              !value.contains('@')) {
-                            return 'Please check your Email Address';
-                          }
-                          return null;
-                        },
-                        onSaved: (value) {
-                          _enteredEmail = value!;
-                        },
-                      ),
-                      if (!isLogin)
+            Center(
+              child: Card(
+                margin: const EdgeInsets.all(12),
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.all(16),
+                  child: Form(
+                    key: _form,
+                    child: Column(
+                      children: [
+                        if (!isLogin)
+                          UserImagePicker(
+                            onPickImage: (image) {
+                              pickedImage = image;
+                            },
+                          ),
                         TextFormField(
                           decoration:
-                              const InputDecoration(labelText: 'Username'),
+                              const InputDecoration(labelText: 'Email Address'),
+                          autocorrect: false,
+                          keyboardType: TextInputType.emailAddress,
+                          textCapitalization: TextCapitalization.none,
                           validator: (value) {
-                            if (value == null || value.trim().length < 4) {
-                              return 'Please check your Username';
+                            if (value == null ||
+                                value.trim().isEmpty ||
+                                !value.contains('@')) {
+                              return 'Please check your Email Address';
                             }
                             return null;
                           },
                           onSaved: (value) {
-                            _enteredUsername = value!;
+                            _enteredEmail = value!;
                           },
                         ),
-                      TextFormField(
-                        obscureText: true,
-                        decoration:
-                            const InputDecoration(labelText: 'Password'),
-                        validator: (value) {
-                          if (value == null || value.trim().length < 6) {
-                            return 'Please check your Password';
-                          }
-                          return null;
-                        },
-                        onSaved: (value) {
-                          _enteredPassword = value!;
-                        },
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      if (isAuthentication) const CircularProgressIndicator(),
-                      if (!isAuthentication)
-                        TextButton(
-                          onPressed: credentialUser,
-                          child: Text(isLogin ? 'Login' : 'SignUp'),
+                        if (!isLogin)
+                          TextFormField(
+                            decoration:
+                                const InputDecoration(labelText: 'Username'),
+                            validator: (value) {
+                              if (value == null || value.trim().length < 4) {
+                                return 'Please check your Username';
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              _enteredUsername = value!;
+                            },
+                          ),
+                        TextFormField(
+                          obscureText: true,
+                          decoration:
+                              const InputDecoration(labelText: 'Password'),
+                          validator: (value) {
+                            if (value == null || value.trim().length < 6) {
+                              return 'Please check your Password';
+                            }
+                            return null;
+                          },
+                          onSaved: (value) {
+                            _enteredPassword = value!;
+                          },
                         ),
-                      TextButton(
-                        onPressed: () {
-                          setState(() {
-                            isLogin = !isLogin;
-                          });
-                        },
-                        child: Text(isLogin
-                            ? 'Create an Account'
-                            : 'I already have an account'),
-                      ),
-                      if (isLogin)
-                        CheckboxListTile(
-                          title: const Text('Admin Login'),
-                          value: isManager,
-                          onChanged: (value) {
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        if (isAuthentication) const CircularProgressIndicator(),
+                        if (!isAuthentication)
+                          TextButton(
+                            onPressed: credentialUser,
+                            child: Text(isLogin ? 'Login' : 'SignUp'),
+                          ),
+                        TextButton(
+                          onPressed: () {
                             setState(() {
-                              isManager = value!;
+                              isLogin = !isLogin;
                             });
                           },
+                          child: Text(isLogin
+                              ? 'Create an Account'
+                              : 'I already have an account'),
                         ),
-                    ],
+                        if (isLogin)
+                          CheckboxListTile(
+                            title: const Text('Admin Login'),
+                            value: isManager,
+                            onChanged: (value) {
+                              setState(() {
+                                isManager = value!;
+                              });
+                            },
+                          ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

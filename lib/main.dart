@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import 'package:kivi_app/screens/splash.dart';
 import 'package:kivi_app/screens/start_screen.dart';
-
 import 'firebase_options.dart';
 
 void main() async {
@@ -25,9 +24,9 @@ class App extends StatelessWidget {
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(
             brightness: Brightness.dark,
-            seedColor: const Color.fromARGB(255, 131, 57, 0),
+            seedColor: Colors.blue,
           )),
-      home: const StartScreen(),
+      home: const SplashScreen(),
     );
   }
 }

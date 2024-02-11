@@ -20,9 +20,7 @@ class TabsScreen extends ConsumerStatefulWidget {
   const TabsScreen({super.key});
 
   @override
-  ConsumerState<TabsScreen> createState() {
-    return _TabsScreenState();
-  }
+  ConsumerState<TabsScreen> createState() => _TabsScreenState();
 }
 
 class _TabsScreenState extends ConsumerState<TabsScreen> {
@@ -33,8 +31,10 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
       _selectedPageIndex = index;
       if (index == 1) {
         final favoriteLesson = ref.watch(favoriteProvider);
-        addFavoriteToFirestore(FirebaseAuth.instance.currentUser!.uid,
-            favoriteLesson.map((lesson) => lesson.id).toList());
+        addFavoriteToFirestore(
+          FirebaseAuth.instance.currentUser!.uid,
+          favoriteLesson.map((lesson) => lesson.id).toList(),
+        );
       }
     });
   }
@@ -51,9 +51,11 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
   }
 
   Future<void> addFavoriteToFirestore(
-      String userId, List<String> favoriteLessonIds) async {
+    String userId,
+    List<String> favoriteLessonIds,
+  ) async {
     final firestore = FirebaseFirestore.instance;
-    await firestore.collection('usersli').doc(userId).set({
+    await firestore.collection('favorites').doc(userId).set({
       'email': FirebaseAuth.instance.currentUser!.email,
       'username': FirebaseAuth.instance.currentUser!.displayName,
       'favorites': favoriteLessonIds,

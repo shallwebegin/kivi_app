@@ -23,7 +23,7 @@ class CategoriesScreen extends StatelessWidget {
           Opacity(
             opacity: 0,
             child: Image.asset(
-              'assets/images/kivi.jpg',
+              'assets/images/pngegg.png',
               height: double.infinity,
               fit: BoxFit.cover,
             ),

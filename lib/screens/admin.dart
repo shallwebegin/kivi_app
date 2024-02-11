@@ -19,6 +19,7 @@ class AdminScreen extends StatelessWidget {
     final User? user = _firebase.currentUser;
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
         title: const Text('Admin Page'),
         actions: [
@@ -44,7 +45,7 @@ class AdminScreen extends StatelessWidget {
                 radius: 70,
                 backgroundColor: Colors.grey,
                 foregroundImage: AssetImage(
-                  'assets/images/kivi.jpg',
+                  'assets/images/pngegg.png',
                 ),
               ),
               const SizedBox(
@@ -61,7 +62,7 @@ class AdminScreen extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              Row(
+              Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
@@ -71,7 +72,7 @@ class AdminScreen extends StatelessWidget {
                     child: const Text('Ders Ekle'),
                   ),
                   const SizedBox(
-                    width: 20,
+                    height: 20,
                   ),
                   ElevatedButton(
                     onPressed: () {
@@ -79,20 +80,23 @@ class AdminScreen extends StatelessWidget {
                     },
                     child: const Text('Ders Sil'),
                   ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => const AllUsersScreen(),
+                        ),
+                      );
+                    },
+                    child: const Text('Ogrenci Sil'),
+                  ),
                 ],
               ),
               const SizedBox(
                 height: 20,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const AllUsersScreen(),
-                    ),
-                  );
-                },
-                child: const Text('Ogrenci Sil'),
               ),
             ],
           ),
@@ -107,12 +111,12 @@ class AdminScreen extends StatelessWidget {
       builder: (BuildContext context) {
         return Dialog(
           // Sayfanın tamamını kaplar
-          insetPadding: EdgeInsets.zero,
+
           child: AddDersForm(
             onDersSubmitted: (ders) {
               addDersToFirestore(ders).then((_) {
                 Navigator.of(context).pop(); // Modal'ı kapat
-                Navigator.of(context).push(
+                Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) => const TabsScreen()),
                 );
               }).catchError((error) {

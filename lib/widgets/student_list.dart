@@ -29,6 +29,7 @@ class _AllUsersScreenState extends State<AllUsersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         actions: [
           IconButton(
               onPressed: () {

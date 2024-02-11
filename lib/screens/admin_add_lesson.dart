@@ -24,145 +24,166 @@ class _AddDersFormState extends State<AddDersForm> {
   late Complexity complexity = Complexity.kolay;
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TextFormField(
-              decoration: const InputDecoration(labelText: 'ID'),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Lütfen bir ID girin';
-                }
-                return null;
-              },
-              onSaved: (value) {
-                id = value!;
-              },
-            ),
-            TextFormField(
-              decoration: const InputDecoration(labelText: 'Categories'),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Lütfen bir Category girin';
-                }
-                return null;
-              },
-              onSaved: (value) {
-                categories = value!.split(',');
-              },
-            ),
-            TextFormField(
-              decoration: const InputDecoration(labelText: 'Title'),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Lütfen bir başlık girin';
-                }
-                return null;
-              },
-              onSaved: (value) {
-                title = value!;
-              },
-            ),
-            TextFormField(
-              decoration: const InputDecoration(labelText: 'Image URL'),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Lütfen bir resim URL\'si girin';
-                }
-                return null;
-              },
-              onSaved: (value) {
-                imageUrl = value!;
-              },
-            ),
-            TextFormField(
-              decoration: const InputDecoration(labelText: 'Duration'),
-              keyboardType: TextInputType.number,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Lütfen bir süre girin';
-                }
-                return null;
-              },
-              onSaved: (value) {
-                duration = int.parse(value!);
-              },
-            ),
-            TextFormField(
-              decoration: const InputDecoration(labelText: 'Sorular'),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Lütfen soruları girin';
-                }
-                return null;
-              },
-              onSaved: (value) {
-                // Örnek olarak virgülle ayrılmış stringleri bir listeye ayırabilirsiniz
-                sorular = value!.split(',');
-              },
-            ),
-            TextFormField(
-              decoration: const InputDecoration(labelText: 'Cevaplar'),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Lütfen cevapları girin';
-                }
-                return null;
-              },
-              onSaved: (value) {
-                // Örnek olarak virgülle ayrılmış stringleri bir listeye ayırabilirsiniz
-                cevaplar = value!.split(',');
-              },
-            ),
-            Container(
-              width: 200,
-              child: DropdownButtonFormField(
-                value: complexity,
-                items: Complexity.values
-                    .map(
-                      (complexity) => DropdownMenuItem(
-                        value: complexity,
-                        child: Text(
-                          complexity.name.toString(),
-                        ),
-                      ),
-                    )
-                    .toList(),
-                onChanged: (value) {
-                  setState(() {
-                    complexity = value!;
-                  });
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'ID'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Lütfen bir ID girin';
+                  }
+                  return null;
                 },
                 onSaved: (value) {
-                  complexity = value!;
+                  id = value!;
                 },
               ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  _formKey.currentState!.save();
-                  // Formda girilen verileri kullanarak bir Ders nesnesi oluşturun
-                  final ders = Ders(
-                    id: id,
-                    categories: categories, // Kategori bilgisi ekleyin
-                    title: title,
-                    imageUrl: imageUrl,
-                    sorular: sorular,
-                    cevaplar: cevaplar,
-                    duration: duration,
-                    complexity: complexity, // Karmaşıklık seviyesini ayarlayın
-                  );
-                  // Oluşturulan Ders nesnesini dışa aktarın
-                  widget.onDersSubmitted(ders);
-                }
-              },
-              child: const Text('Dersi Ekle'),
-            ),
-          ],
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'Categories'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Lütfen bir Category girin';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  categories = value!.split(',');
+                },
+              ),
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'Title'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Lütfen bir başlık girin';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  title = value!;
+                },
+              ),
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'Image URL'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Lütfen bir resim URL\'si girin';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  imageUrl = value!;
+                },
+              ),
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'Duration'),
+                keyboardType: TextInputType.number,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Lütfen bir süre girin';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  duration = int.parse(value!);
+                },
+              ),
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'Sorular'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Lütfen soruları girin';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  // Örnek olarak virgülle ayrılmış stringleri bir listeye ayırabilirsiniz
+                  sorular = value!.split(',');
+                },
+              ),
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'Cevaplar'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Lütfen cevapları girin';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  // Örnek olarak virgülle ayrılmış stringleri bir listeye ayırabilirsiniz
+                  cevaplar = value!.split(',');
+                },
+              ),
+              SizedBox(
+                width: 70,
+                child: DropdownButtonFormField(
+                  value: complexity,
+                  items: Complexity.values
+                      .map(
+                        (complexity) => DropdownMenuItem(
+                          value: complexity,
+                          child: Text(
+                            complexity.name.toString(),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      complexity = value!;
+                    });
+                  },
+                  onSaved: (value) {
+                    complexity = value!;
+                  },
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+                        // Formda girilen verileri kullanarak bir Ders nesnesi oluşturun
+                        final ders = Ders(
+                          id: id,
+                          categories: categories, // Kategori bilgisi ekleyin
+                          title: title,
+                          imageUrl: imageUrl,
+                          sorular: sorular,
+                          cevaplar: cevaplar,
+                          duration: duration,
+                          complexity:
+                              complexity, // Karmaşıklık seviyesini ayarlayın
+                        );
+                        // Oluşturulan Ders nesnesini dışa aktarın
+                        widget.onDersSubmitted(ders);
+                      }
+                    },
+                    child: const Text('Dersi Ekle'),
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('Cancel'),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

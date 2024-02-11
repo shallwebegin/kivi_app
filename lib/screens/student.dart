@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:kivi_app/screens/tabs.dart';
 
 final _firebase = FirebaseAuth.instance;
 
@@ -10,6 +11,22 @@ class StudentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('User Profile'),
+        automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => const TabsScreen(),
+                ),
+              );
+            },
+            icon: const Icon(Icons.home),
+          ),
+        ],
+      ),
       body: FutureBuilder(
         future: _getStudentInfo(),
         builder: (context, snapshot) {

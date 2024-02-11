@@ -30,16 +30,6 @@ class MainDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.favorite),
-            title: Text(
-              'Favorites',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            onTap: () {
-              onSelectScreen('Favorites');
-            },
-          ),
-          ListTile(
             leading: const Icon(Icons.settings),
             title: Text(
               'Filters',
