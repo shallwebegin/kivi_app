@@ -28,14 +28,14 @@ final filterProvider =
 final filteredLessonProvider = Provider((ref) {
   final lessons = ref.watch(lessonProvider);
   final activeFilters = ref.watch(filterProvider);
-  return lessons.where((ders) {
-    if (activeFilters[Filters.zor]! && !ders.zor!) {
+  return lessons.where((lesson) {
+    if (activeFilters[Filters.zor]! && !lesson.zor!) {
       return false;
     }
-    if (activeFilters[Filters.orta]! && !ders.orta!) {
+    if (activeFilters[Filters.orta]! && !lesson.orta!) {
       return false;
     }
-    if (activeFilters[Filters.kolay]! && !ders.kolay!) {
+    if (activeFilters[Filters.kolay]! && !lesson.kolay!) {
       return false;
     }
     return true;

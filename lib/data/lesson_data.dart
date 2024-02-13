@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:kivi_app/models/ders.dart';
-import 'package:kivi_app/models/kategori.dart';
+import 'package:kivi_app/models/lessons.dart';
+import 'package:kivi_app/models/category.dart';
 
-const mevcutKategoriler = [
+const availableCategories = [
   Category(
     id: 'c1',
     title: 'Matematik',
@@ -36,8 +36,8 @@ const mevcutKategoriler = [
   ),
 ];
 
-const dersKonulari = [
-  Ders(
+const lessonSubject = [
+  Lesson(
     id: 'm1',
     categories: [
       'c1',
@@ -47,7 +47,7 @@ const dersKonulari = [
     imageUrl:
         'https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Math-icon-rounded.svg/640px-Math-icon-rounded.svg.png',
     duration: 60,
-    sorular: [
+    question: [
       '1. Soru : f(x) = 6x² + x - 1 eğrisine x = 3 apsisli noktada teğet olan doğrunun eğimi kaçtır ?',
       '2. Soru : f(x) = x³ + 4x² - 1 eğrisine üzerindeki  x = -2 apsisli noktasından çizilen teğetin eğimi kaçtır ?',
       '3. Soru : f(x) = x² fonksiyonuna x = 2 apsisli noktada teğet olan doğrunun eğimi kaçtır ?',
@@ -59,7 +59,7 @@ const dersKonulari = [
       '9. Soru : f(x) = (x + 1)⁴ olduğuna göre, f(x) nedir ?',
       '10. Soru : f(x) = (x³ - 3) * (x² + x + 1) olduğuna göre, f(1) kaçtır ?'
     ],
-    cevaplar: [
+    answer: [
       '1. Soru : 6*2x + 1 (Burada x gördüğümüz yere 3 yazacağız) 6 * 2 * 3 + 1 =36 + 1 =37 olacaktır cevap.',
       '2. Soru : 3x² + 8x (Burada x gördüğümüz yere -2 yazacağız.) 3 * (-2)² + 8 * (-2) =3 * 4 -16 =12 - 16 =-4 olacaktır cevap.',
       '3. Soru : 2*x  (x gördüğümüz yere 2 yazacağız.) 2*2 =4 olacaktır cevap.',
@@ -75,7 +75,7 @@ const dersKonulari = [
     orta: false,
     kolay: false,
   ),
-  Ders(
+  Lesson(
     id: 'm2',
     categories: [
       'c1',
@@ -85,7 +85,7 @@ const dersKonulari = [
     imageUrl:
         'https://www.matematiktutkusu.com/forum/ekstra/matimage/integraldegisken11.png',
     duration: 60,
-    sorular: [
+    question: [
       '1. Soru : ∫(2x+1)7dx ifadesinin eşiti nedir?',
       '2. Soru : ∫(2x-3)/√x²-3x+1 dx ifadesinin eşiti nedir?',
       '3. Soru :  ∫√x7+x4 dx ifadesinin eşiti nedir?',
@@ -93,7 +93,7 @@ const dersKonulari = [
       '5. Soru :  ∫sin²xd(cotx) integralinin eşiti nedir?',
       '6. Soru :  ∫sin2x/(3+cos²x)dx integralinin eşiti nedir?',
     ],
-    cevaplar: [
+    answer: [
       '1. Soru : 2x+1=u diyelim bu ifadenin türevi 2 dir o zaman ifadeyi 2.dx=du dersek dx=du/2 oluro zaman yeni ifadem ∫u7du/2 olur buda 1/2(u8/8)du+C burada da u yerine (2x+1) yazarsak sonucu buluruz',
       '2. Soru : x²-3x+1=u diyelim ifadenin türevi (2x-3) olur (2x-3)dx=du yeni ifademiz ∫du/√u=∫u-1/2 du=u1/2/1/2+c dir',
       '3. Soru : ifadeyi x⁴ parantezine alırsak ∫x²√x³+1 olur x³+1=u diyelim ifadenin türevi 3x²dx=du olur x²dx=du/3 yazarsak ifademiz ∫du/3.√u olur buradan 1/3.u-3/3+C gelir u yerine x³+1',
@@ -105,7 +105,7 @@ const dersKonulari = [
     orta: true,
     kolay: false,
   ),
-  Ders(
+  Lesson(
     id: 'm3',
     categories: [
       'c2',
@@ -115,7 +115,7 @@ const dersKonulari = [
     imageUrl:
         'https://evrimagaci.org/public/content_media/5d97474c767b86b103b9a3236ab8b2e3.jpg',
     duration: 45,
-    sorular: [
+    question: [
       '1. Soru : Türk alfabesinde kaç harf bulunmaktadır?',
       '2. Soru : Türk edebiyatında Tanzimat Dönemi hangi yılları kapsar?',
       '3. Soru : Hangi Türk yazar, "Nutuk" adlı eseriyle tanınmıştır?',
@@ -123,7 +123,7 @@ const dersKonulari = [
       '5. Soru : Yunus Emre hangi dönemde yaşamıştır?',
       '6. Soru : "Küçük Ağa" romanının yazarı kimdir?'
     ],
-    cevaplar: [
+    answer: [
       '1. Soru : Türk alfabesinde 29 harf bulunmaktadır. (A, B, C, Ç, D, E, F, G, Ğ, H, I, İ, J, K, L, M, N, O, Ö, P, R, S, Ş, T, U, Ü, V, Y, Z)',
       '2. Soru : Tanzimat Dönemi, 1839-1861 yılları arasını kapsar.',
       '3. Soru : "Nutuk" eseri, Mustafa Kemal Atatürk aittir',
@@ -135,7 +135,7 @@ const dersKonulari = [
     orta: false,
     kolay: true,
   ),
-  Ders(
+  Lesson(
     id: 'm4',
     categories: [
       'c2',
@@ -144,7 +144,7 @@ const dersKonulari = [
     complexity: Complexity.orta,
     imageUrl: 'https://i.ytimg.com/vi/vKXNM60nA3s/maxresdefault.jpg',
     duration: 60,
-    sorular: [
+    question: [
       '1. Soru : Divan edebiyatında "mesnevi" nedir?',
       '2. Soru : Hangi yazar "İnce Mehmed" adlı eseri yazmıştır?',
       '3. Soru : Hangi yazar "İstanbulu Satıyorum" adlı eseriyle tanınmıştır?',
@@ -153,7 +153,7 @@ const dersKonulari = [
       '6. Soru : Hangi dönemde "Fecr-i Ati" edebiyat hareketi ortaya çıkmıştır?',
       '7. Soru : "İnce Mehmed" karakteri hangi yazarın eserinde yer alır?',
     ],
-    cevaplar: [
+    answer: [
       '1. Soru : Mesnevi, divan edebiyatında nazım birimi olarak kullanılan, genellikle beyitlerden oluşan, uzun ve manzum hikayeler içeren bir türdür.',
       '2. Soru : Ahmet Rasim, "İstanbulu Satıyorum" eseriyle tanınan bir yazardır.',
       '3. Soru : Samiha Ayverdi, "Küçük Şeyler" adlı eseriyle tanınan bir yazardır.',
@@ -166,7 +166,7 @@ const dersKonulari = [
     orta: true,
     kolay: false,
   ),
-  Ders(
+  Lesson(
     id: 'm5',
     categories: [
       'c3',
@@ -176,7 +176,7 @@ const dersKonulari = [
     imageUrl:
         'https://fizikist.com/uploads/img/1683728905_12-temel-fizik-kurallarijpg.jpg',
     duration: 40,
-    sorular: [
+    question: [
       '1. Soru : Bir cisim, başlangıçta 5 m/s hızla doğuya hareket ederken 4 saniye boyunca 2 m/s² ivmeleniyor. Hareketin sonundaki hızını bulunuz.',
       '2. Soru : 100 N kuvvet, bir kutuyu 5 m boyunca düz bir yüzeyde itiyor. Yapılan işi hesaplayınız.',
       '3. Soru : 0.2 kg kütlesi olan bir yay, 4 N kuvvetle çekildiğinde 0.1 m uzuyor. Yayın elastik sabitini bulunuz.',
@@ -188,7 +188,7 @@ const dersKonulari = [
       '9. Soru : Bir direnç, 12 V potansiyel farkına bağlı olarak 3 A akım geçiriyorsa, direncin değerini hesaplayınız.',
       '10.Soru : Bir fotonun enerjisi, 600 nm dalga boyundaki bir ışıkla belirlenmiştir. Fotonun enerjisini hesaplayınız. '
     ],
-    cevaplar: [
+    answer: [
       '1. Soru : (Cevap: 13 m/s)',
       '2. Soru : (Cevap: 500 J)',
       '3. Soru : (Cevap: 800 N/m)',
@@ -204,7 +204,7 @@ const dersKonulari = [
     orta: false,
     kolay: false,
   ),
-  Ders(
+  Lesson(
     id: 'm6',
     categories: [
       'c3',
@@ -214,7 +214,7 @@ const dersKonulari = [
     imageUrl:
         'https://www.muhendisbeyinler.net/wp-content/uploads/2014/10/fizik-dersi-nasil-calisilir.jpg',
     duration: 60,
-    sorular: [
+    question: [
       '1. Soru : Bir cisim, 10 m/s hızla hareket ederken 5 saniye boyunca sabit bir ivmeyle yavaşlıyor. Hareketin sonunda cismin hızını bulunuz. (Cevap: 5 m/s)',
       '2. Soru : 50 J enerji harcanarak bir cisme 5 m yükseklikten düşürülüyor. Cismin kütlesini bulunuz. ',
       '3. Soru : Bir sarkaç, 2 saniyede bir tam salınım yapmaktadır. Sarkacın frekansını bulunuz. ',
@@ -226,7 +226,7 @@ const dersKonulari = [
       '9. Soru : Bir ampul, 24 V potansiyel farkına bağlı olarak 3 A akım çekiyorsa, ampulün direncini hesaplayınız.',
       '10.Soru : Bir fotonun enerjisi, 400 nm dalga boyundaki bir ışıkla belirlenmiştir. Fotonun enerjisini hesaplayınız. ',
     ],
-    cevaplar: [
+    answer: [
       '1. Soru : (Cevap: 5 m/s)',
       '2. Soru : (Cevap: 10 kg)',
       '3. Soru : (Cevap: 0.5 Hz)',
@@ -242,7 +242,7 @@ const dersKonulari = [
     orta: true,
     kolay: false,
   ),
-  Ders(
+  Lesson(
     id: 'm7',
     categories: [
       'c4',
@@ -252,7 +252,7 @@ const dersKonulari = [
     imageUrl:
         'https://ozelgobeklitepekoleji.com/tema/genel/uploads/egitim_birimleri/kimya.jpg',
     duration: 60,
-    sorular: [
+    question: [
       '1. Soru : H₂SO₄ molekülünde sülfür atomunun oksidasyon sayısı nedir? ',
       '2. Soru : 0.2 M NaOH çözeltisi, 25 mLlik bir HCl çözeltisiyle tamamlandığında, eklenen NaOH miktarını hesaplayınız. ',
       '3. Soru : 2 L hacmindeki bir gazın, Boyles Yasasına göre, basıncını 4 kat artırırsak yeni hacmi nedir?',
@@ -261,7 +261,7 @@ const dersKonulari = [
       '6. Soru : 1 mol CO₂nin içinde kaç mol oksijen atomu bulunur?',
       '7. Soru : Cl₂ + 2KBr → 2KCl + Br₂ reaksiyonunda, başlangıçta 1 mol Cl₂ kullanılırsa kaç mol Br₂ üretilir?',
     ],
-    cevaplar: [
+    answer: [
       '1. Soru : (Cevap: +6)',
       '2. Soru : (Cevap: 0.005 mol)',
       '3. Soru : (Cevap: 0.5 L)',
@@ -274,7 +274,7 @@ const dersKonulari = [
     orta: false,
     kolay: true,
   ),
-  Ders(
+  Lesson(
     id: 'm8',
     categories: [
       'c4',
@@ -284,7 +284,7 @@ const dersKonulari = [
     imageUrl:
         'https://images.ctfassets.net/szez98lehkfm/2BmtRiqZaVkmZCpdIiVxkH/2095c280a6ae7615ff1a89a8ff17fb70/MyIC_Inline_78458',
     duration: 45,
-    sorular: [
+    question: [
       '1. Soru : 2 L hacmindeki bir gaz, basıncını 3 kat artırırsa yeni hacmi nedir? ',
       '2. Soru : Bir gazın hacmi, -20°Cden 80°Cye çıktığında, başlangıç hacminin kaç katına çıkar? ',
       '3. Soru : 1 mol gazın hacmi, sabit sıcaklık ve basınç altında ne kadar olur?',
@@ -293,7 +293,7 @@ const dersKonulari = [
       '6. Soru : Bir gazın basıncı 2 atm, hacmi 3 L ve sıcaklığı 300 K iken, yeni sıcaklıkta basıncını bulunuz, eğer hacmi 4 Lye çıkmışsa.',
       '7. Soru : 3 L H₂ ve 5 L O₂ karışımının toplam hacmi nedir?',
     ],
-    cevaplar: [
+    answer: [
       '1. Soru : (Cevap: 0.67 L)',
       '2. Soru : (Cevap: 4 kat)',
       '3. Soru : (Cevap: 22.4 L)',
@@ -306,7 +306,7 @@ const dersKonulari = [
     orta: true,
     kolay: false,
   ),
-  Ders(
+  Lesson(
     id: 'm9',
     categories: [
       'c5',
@@ -316,7 +316,7 @@ const dersKonulari = [
     imageUrl:
         'https://beyinsizler.net/wp-content/uploads/2020/09/biyoloji-nedir.jpg',
     duration: 45,
-    sorular: [
+    question: [
       '1. Soru : Bir hücre, mitoz bölünme sürecinde başlangıçta 6 kromozoma sahipse, her bir kızıl hücrenin kromozom sayısı nedir? ',
       '2. Soru : Bir bireyin genotipi AaBbCc ise, gametlerinin toplam çeşitliliği nedir? ',
       '3. Soru : Bir populasyonda, çevresel değişikliklere uyum sağlayan bireylerin genetik özelliklerinin zamanla artmasına ne denir? ',
@@ -328,7 +328,7 @@ const dersKonulari = [
       '9. Soru : Bir enzim, bir substratı nasıl etkiler?',
       '10.Soru : Bir bitkinin büyümesi için gerekli olan temel besin maddeleri nelerdir? ',
     ],
-    cevaplar: [
+    answer: [
       '1. Soru : (Cevap: 6)',
       '2. Soru : (Cevap: 8)',
       '3. Soru : (Cevap: Doğal Seçilim)',
@@ -344,7 +344,7 @@ const dersKonulari = [
     orta: false,
     kolay: false,
   ),
-  Ders(
+  Lesson(
     id: 'm10',
     categories: [
       'c5',
@@ -354,7 +354,7 @@ const dersKonulari = [
     imageUrl:
         'https://atabeyy.com/wp-content/uploads/2018/12/biyoloji-ozel-ders-1200x673.jpg',
     duration: 45,
-    sorular: [
+    question: [
       '1. Soru : Evrim teorisinin temel ilkeleri nelerdir?',
       '2. Soru : Charles Darwin, doğal seçilim konseptini hangi gözlemlerle destekledi?',
       '3. Soru : Bir populasyonun çevreye uyum sağlaması sürecine ne ad verilir? ',
@@ -366,7 +366,7 @@ const dersKonulari = [
       '9. Soru : Yeni genetik varyasyonların ortaya çıkmasında önemli bir rol oynayan süreç nedir? ',
       '10.Soru : Antibiyotik kullanımının sık olması, bakterilerde neden evrimsel bir avantaja dönüşebilir?',
     ],
-    cevaplar: [
+    answer: [
       '1. Soru : (Cevap: Ortak soy, doğal seçilim, çeşitlilik)',
       '2. Soru : (Cevap: Galápagos Adalarında farklı türlerdeki kuş popülasyonları)',
       '3. Soru : (Cevap: Adaptasyon)',
@@ -382,7 +382,7 @@ const dersKonulari = [
     orta: false,
     kolay: true,
   ),
-  Ders(
+  Lesson(
     id: 'm10',
     categories: [
       'c6',
@@ -392,7 +392,7 @@ const dersKonulari = [
     imageUrl:
         'https://www.isler.com.tr/panel/img//blog/24736269322962030340tyt-tarih-netleri-nasil-artar.jpeg',
     duration: 45,
-    sorular: [
+    question: [
       '1. Soru : Hangi antik Yunan filozofu, "Bilgisizlik, doğru bilgiye giden ilk adımdır." demiştir?',
       '2. Soru : Haçlı Seferleri hangi dönemde gerçekleşti?',
       '3. Soru : Rönesans, hangi coğrafyada 14. yüzyılda başlamıştır?',
@@ -404,7 +404,7 @@ const dersKonulari = [
       '9. Soru : Sanayi Devrimi hangi yüzyılda ve hangi ülkede başlamıştır? ',
       '10.Soru : Saraybosna Suikastı hangi olaya yol açmıştır? ',
     ],
-    cevaplar: [
+    answer: [
       '1. Soru : (Cevap: Sokrat)',
       '2. Soru : (Cevap: 11-13. yüzyıllar)',
       '3. Soru : (Cevap: İtalya)',
@@ -420,7 +420,7 @@ const dersKonulari = [
     orta: false,
     kolay: true,
   ),
-  Ders(
+  Lesson(
     id: 'm10',
     categories: [
       'c6',
@@ -430,7 +430,7 @@ const dersKonulari = [
     imageUrl:
         'https://derstarih.com/wp-content/uploads/2019/11/Tarih-ve-Edebiyat.jpg',
     duration: 45,
-    sorular: [
+    question: [
       '1. Soru : Hangi olay, 1939da II. Dünya Savaşının başlamasına yol açtı?',
       '2. Soru : Soğuk Savaş döneminde, ABD ve SSCB arasındaki çatışmaların simgesi olan iki blok nedir?',
       '3. Soru : 1950-1953 yılları arasında yaşanan çatışma hangi iki Kore arasında gerçekleşti? ',
@@ -442,7 +442,7 @@ const dersKonulari = [
       '9. Soru : Hangi yıl, Güney Afrikada apartheid rejimine karşı mücadelede önemli bir dönüm noktası olarak kabul edilir?  ',
       '10.Soru : Simón Bolívar, hangi kıtadaki birçok ülkenin bağımsızlığını kazandı?',
     ],
-    cevaplar: [
+    answer: [
       '1. Soru : (Cevap: Almanyanın Polonyayı işgali)',
       '2. Soru : (Cevap: NATO ve Varşova Paktı)',
       '3. Soru : (Cevap: Kuzey Kore ve Güney Kore)',

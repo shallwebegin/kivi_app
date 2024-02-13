@@ -44,7 +44,7 @@ class _UserImagePickerState extends State<UserImagePicker> {
       children: [
         CircleAvatar(
           radius: 40,
-          backgroundColor: Colors.grey,
+          backgroundImage: const AssetImage('assets/images/user.png'),
           foregroundImage:
               _pickedImageFile != null ? FileImage(_pickedImageFile!) : null,
         ),
@@ -54,12 +54,12 @@ class _UserImagePickerState extends State<UserImagePicker> {
             TextButton.icon(
               onPressed: pickImage,
               icon: const Icon(Icons.camera_alt),
-              label: const Text('Add image'),
+              label: const Text('Take a picture'),
             ),
             TextButton.icon(
               onPressed: addImage,
               icon: const Icon(Icons.image),
-              label: const Text('pick image'),
+              label: const Text('Add a image'),
             ),
           ],
         ),

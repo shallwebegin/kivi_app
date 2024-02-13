@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:kivi_app/models/ders.dart';
+
+import 'package:kivi_app/models/lessons.dart';
 import 'package:kivi_app/screens/lesson_detail.dart';
 import 'package:kivi_app/widgets/lesson_item.dart';
 
 class LessonScreen extends StatelessWidget {
-  const LessonScreen({super.key, required this.dersler, this.title});
-  final List<Ders> dersler;
+  const LessonScreen({super.key, required this.lessons, this.title});
+  final List<Lesson> lessons;
   final String? title;
 
-  void pickLesson(BuildContext context, Ders ders) {
+  void pickLesson(BuildContext context, Lesson lesson) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => LessonDetailScreen(ders: ders),
+        builder: (context) => LessonDetailScreen(lesson: lesson),
       ),
     );
   }
@@ -19,15 +20,15 @@ class LessonScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget content = ListView.builder(
-      itemCount: dersler.length,
+      itemCount: lessons.length,
       itemBuilder: (context, index) => LessonItem(
-        ders: dersler[index],
-        onPickLesson: (ders) {
-          pickLesson(context, ders);
+        lesson: lessons[index],
+        onPickLesson: (lesson) {
+          pickLesson(context, lesson);
         },
       ),
     );
-    if (dersler.isEmpty) {
+    if (lessons.isEmpty) {
       content = const Center(
         child: Text('No found anything'),
       );

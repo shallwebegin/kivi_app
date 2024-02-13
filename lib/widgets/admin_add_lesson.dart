@@ -1,42 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:kivi_app/models/ders.dart';
+import 'package:kivi_app/models/lessons.dart';
 
-class AddDersForm extends StatefulWidget {
-  final void Function(Ders ders) onDersSubmitted;
-
-  const AddDersForm({super.key, required this.onDersSubmitted});
+class AdminAddLesson extends StatefulWidget {
+  const AdminAddLesson({super.key, required this.onLessonSubmitted});
+  final void Function(Lesson lesson) onLessonSubmitted;
 
   @override
-  State<AddDersForm> createState() => _AddDersFormState();
+  State<AdminAddLesson> createState() => _AdminAddLessonState();
 }
 
-class _AddDersFormState extends State<AddDersForm> {
+class _AdminAddLessonState extends State<AdminAddLesson> {
   final _formKey = GlobalKey<FormState>();
-
   late String id;
   late String title;
-  late List<String> categories;
   late String imageUrl;
   late int duration;
-  late List<String> sorular;
-  late List<String> cevaplar;
-
-  late Complexity complexity = Complexity.kolay;
+  late List<String> question;
+  late List<String> answer;
+  late List<String> categories;
+  late Complexity complexity = Complexity.zor;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8),
       child: Form(
         key: _formKey,
         child: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TextFormField(
                 decoration: const InputDecoration(labelText: 'ID'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Lütfen bir ID girin';
+                    return 'Please check information';
                   }
                   return null;
                 },
@@ -48,7 +44,7 @@ class _AddDersFormState extends State<AddDersForm> {
                 decoration: const InputDecoration(labelText: 'Categories'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Lütfen bir Category girin';
+                    return 'Please check information';
                   }
                   return null;
                 },
@@ -60,7 +56,7 @@ class _AddDersFormState extends State<AddDersForm> {
                 decoration: const InputDecoration(labelText: 'Title'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Lütfen bir başlık girin';
+                    return 'Please check information';
                   }
                   return null;
                 },
@@ -69,10 +65,10 @@ class _AddDersFormState extends State<AddDersForm> {
                 },
               ),
               TextFormField(
-                decoration: const InputDecoration(labelText: 'Image URL'),
+                decoration: const InputDecoration(labelText: 'ImageUrl'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Lütfen bir resim URL\'si girin';
+                    return 'Please check information';
                   }
                   return null;
                 },
@@ -82,10 +78,9 @@ class _AddDersFormState extends State<AddDersForm> {
               ),
               TextFormField(
                 decoration: const InputDecoration(labelText: 'Duration'),
-                keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Lütfen bir süre girin';
+                    return 'Please check information';
                   }
                   return null;
                 },
@@ -94,85 +89,67 @@ class _AddDersFormState extends State<AddDersForm> {
                 },
               ),
               TextFormField(
-                decoration: const InputDecoration(labelText: 'Sorular'),
+                decoration: const InputDecoration(labelText: 'Questions'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Lütfen soruları girin';
+                    return 'Please check information';
                   }
                   return null;
                 },
                 onSaved: (value) {
-                  // Örnek olarak virgülle ayrılmış stringleri bir listeye ayırabilirsiniz
-                  sorular = value!.split(',');
+                  question = value!.split(',');
                 },
               ),
               TextFormField(
-                decoration: const InputDecoration(labelText: 'Cevaplar'),
+                decoration: const InputDecoration(labelText: 'Answers'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Lütfen cevapları girin';
+                    return 'Please check information';
                   }
                   return null;
                 },
                 onSaved: (value) {
-                  // Örnek olarak virgülle ayrılmış stringleri bir listeye ayırabilirsiniz
-                  cevaplar = value!.split(',');
+                  answer = value!.split(',');
                 },
               ),
-              SizedBox(
-                width: 70,
-                child: DropdownButtonFormField(
-                  value: complexity,
-                  items: Complexity.values
-                      .map(
-                        (complexity) => DropdownMenuItem(
-                          value: complexity,
-                          child: Text(
-                            complexity.name.toString(),
-                          ),
-                        ),
-                      )
-                      .toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      complexity = value!;
-                    });
-                  },
-                  onSaved: (value) {
+              DropdownButtonFormField(
+                value: complexity,
+                items: Complexity.values
+                    .map(
+                      (complexity) => DropdownMenuItem(
+                        value: complexity,
+                        child: Text(complexity.name.toString()),
+                      ),
+                    )
+                    .toList(),
+                onChanged: (value) {
+                  setState(() {
                     complexity = value!;
-                  },
-                ),
-              ),
-              const SizedBox(
-                height: 20,
+                  });
+                },
+                onSaved: (value) {
+                  complexity = value!;
+                },
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
-                        // Formda girilen verileri kullanarak bir Ders nesnesi oluşturun
-                        final ders = Ders(
-                          id: id,
-                          categories: categories, // Kategori bilgisi ekleyin
-                          title: title,
-                          imageUrl: imageUrl,
-                          sorular: sorular,
-                          cevaplar: cevaplar,
-                          duration: duration,
-                          complexity:
-                              complexity, // Karmaşıklık seviyesini ayarlayın
-                        );
-                        // Oluşturulan Ders nesnesini dışa aktarın
-                        widget.onDersSubmitted(ders);
+                        final lesson = Lesson(
+                            id: id,
+                            categories: categories,
+                            title: title,
+                            imageUrl: imageUrl,
+                            question: question,
+                            answer: answer,
+                            duration: duration,
+                            complexity: complexity);
+                        widget.onLessonSubmitted(lesson);
                       }
                     },
-                    child: const Text('Dersi Ekle'),
-                  ),
-                  const SizedBox(
-                    width: 5,
+                    child: const Text('Add Lesson'),
                   ),
                   ElevatedButton(
                     onPressed: () {

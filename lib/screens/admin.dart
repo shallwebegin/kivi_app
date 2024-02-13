@@ -2,12 +2,13 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:kivi_app/models/ders.dart';
-import 'package:kivi_app/screens/admin_add_lesson.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:kivi_app/models/lessons.dart';
 import 'package:kivi_app/screens/credential.dart';
-import 'package:kivi_app/screens/tabs.dart';
-import 'package:kivi_app/widgets/student_list.dart';
+
+import 'package:kivi_app/widgets/admin_add_lesson.dart';
+import 'package:kivi_app/widgets/all_users_screen.dart';
 
 final _firebase = FirebaseAuth.instance;
 
@@ -36,91 +37,135 @@ class AdminScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 100),
-          child: Column(
-            children: [
-              const CircleAvatar(
-                radius: 70,
-                backgroundColor: Colors.grey,
-                foregroundImage: AssetImage(
-                  'assets/images/pngegg.png',
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 100),
+            child: Column(
+              children: [
+                const CircleAvatar(
+                  radius: 70,
+                  backgroundColor: Colors.grey,
+                  foregroundImage: AssetImage(
+                    'assets/images/pngegg.png',
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              user != null
-                  ? Text(
-                      'Admin Email Address : ${user.email}',
-                      style: Theme.of(context).textTheme.titleLarge,
-                      textAlign: TextAlign.center,
-                      maxLines: 2,
-                    )
-                  : const Text('Admin Email Address not Found'),
-              const SizedBox(
-                height: 20,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      _showAddDersModal(context);
-                    },
-                    child: const Text('Ders Ekle'),
+                const SizedBox(
+                  height: 20,
+                ),
+                user != null
+                    ? Text(
+                        'Admin Email Address : ${user.email}',
+                        style: Theme.of(context).textTheme.titleLarge,
+                        textAlign: TextAlign.center,
+                        maxLines: 2,
+                      )
+                    : const Text('Admin Email Address not Found'),
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 1,
+                      color: Colors.white.withOpacity(0.2),
+                    ),
                   ),
-                  const SizedBox(
-                    height: 20,
+                  height: 250,
+                  width: 400,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Admin Operations',
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const Icon(
+                        Icons.admin_panel_settings,
+                        size: 40,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              _showAddLessonModal(context);
+                            },
+                            child: const Text('Add Lesson'),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              _showDeleteLessonModal(context);
+                            },
+                            child: const Text('Delete Lesson'),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (context) => const AllUsersScreen(),
+                                ),
+                              );
+                            },
+                            child: const Text('Delete User'),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      _showDeleteDersModal(context);
-                    },
-                    child: const Text('Ders Sil'),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => const AllUsersScreen(),
-                        ),
-                      );
-                    },
-                    child: const Text('Ogrenci Sil'),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-            ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  void _showAddDersModal(BuildContext context) {
+  Future<void> addLessonToFirestore(Lesson lesson) {
+    return FirebaseFirestore.instance.collection('lessons').add({
+      'id': lesson.id,
+      'categories': lesson.categories,
+      'title': lesson.title,
+      'imageUrl': lesson.imageUrl,
+      'sorular': lesson.question,
+      'cevaplar': lesson.answer,
+      'duration': lesson.duration,
+      'complexity': lesson.complexity.toString(),
+      'zor': lesson.zor,
+      'orta': lesson.orta,
+      'kolay': lesson.kolay,
+    });
+  }
+
+  void _showAddLessonModal(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return Dialog(
-          // Sayfanın tamamını kaplar
-
-          child: AddDersForm(
-            onDersSubmitted: (ders) {
-              addDersToFirestore(ders).then((_) {
-                Navigator.of(context).pop(); // Modal'ı kapat
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => const TabsScreen()),
-                );
+          child: AdminAddLesson(
+            onLessonSubmitted: (lesson) {
+              addLessonToFirestore(lesson).then((_) {
+                Navigator.of(context).pop();
               }).catchError((error) {
-                // Hata durumunda kullanıcıya bilgi verilebilir
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text('Ders eklenirken hata oluştu: $error'),
@@ -135,49 +180,32 @@ class AdminScreen extends StatelessWidget {
     );
   }
 
-  Future<void> addDersToFirestore(Ders ders) {
-    return FirebaseFirestore.instance.collection('dersler').add({
-      'id': ders.id,
-      'categories': ders.categories,
-      'title': ders.title,
-      'imageUrl': ders.imageUrl,
-      'sorular': ders.sorular,
-      'cevaplar': ders.cevaplar,
-      'duration': ders.duration,
-      'complexity': ders.complexity.toString(),
-      'zor': ders.zor,
-      'orta': ders.orta,
-      'kolay': ders.kolay,
-    });
-  }
-
-  void _showDeleteDersModal(BuildContext context) {
-    String dersTitle = '';
+  void _showDeleteLessonModal(BuildContext context) {
+    String lessonTitle = '';
 
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Ders Sil'),
+          title: const Text('Delete Lesson'),
           content: TextField(
             onChanged: (value) {
-              dersTitle = value;
+              lessonTitle = value;
             },
-            decoration: const InputDecoration(hintText: 'Ders Adı'),
+            decoration: const InputDecoration(hintText: 'Lesson Title'),
           ),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text('İptal'),
+              child: const Text('Cancel'),
             ),
             TextButton(
               onPressed: () {
-                _deleteDers(dersTitle, context);
-                Navigator.of(context).pop();
+                _deleteLesson(lessonTitle, context);
               },
-              child: const Text('Sil'),
+              child: const Text('Delete'),
             ),
           ],
         );
@@ -185,18 +213,16 @@ class AdminScreen extends StatelessWidget {
     );
   }
 
-  void _deleteDers(String dersTitle, BuildContext context) async {
+  void _deleteLesson(String lessonTitle, BuildContext context) async {
     try {
-      // Firestore'da dersleri sorgula
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-          .collection('dersler')
-          .where('title', isEqualTo: dersTitle)
+          .collection('lessons')
+          .where('title', isEqualTo: lessonTitle)
           .get();
 
-      // Ders belgesini bul ve sil
       if (querySnapshot.docs.isNotEmpty) {
         await FirebaseFirestore.instance
-            .collection('dersler')
+            .collection('lessons')
             .doc(querySnapshot.docs.first.id)
             .delete();
 

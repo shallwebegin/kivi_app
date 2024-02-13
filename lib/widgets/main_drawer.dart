@@ -22,7 +22,7 @@ class MainDrawer extends StatelessWidget {
                   width: 5,
                 ),
                 Text(
-                  'Start Tests!',
+                  'Start Solving!',
                   style: Theme.of(context).textTheme.titleLarge,
                   softWrap: true,
                 ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kivi_app/models/kategori.dart';
+import 'package:kivi_app/models/category.dart';
 
 class CategoryGridItem extends StatelessWidget {
   const CategoryGridItem(

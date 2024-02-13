@@ -1,20 +1,20 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kivi_app/models/ders.dart';
+import 'package:kivi_app/models/lessons.dart';
 
-class FavoriteLessonNotifier extends StateNotifier<List<Ders>> {
+class FavoriteLessonNotifier extends StateNotifier<List<Lesson>> {
   FavoriteLessonNotifier() : super([]);
-  bool toggleLessonFavoriteStatus(Ders ders) {
-    final dersIsFavorite = state.contains(ders);
+  bool toggleLessonFavoriteStatus(Lesson lesson) {
+    final dersIsFavorite = state.contains(lesson);
     if (dersIsFavorite) {
-      state = state.where((d) => d.id != ders.id).toList();
+      state = state.where((l) => l.id != lesson.id).toList();
       return false;
     } else {
-      state = [...state, ders];
+      state = [...state, lesson];
       return true;
     }
   }
 }
 
 final favoriteProvider =
-    StateNotifierProvider<FavoriteLessonNotifier, List<Ders>>(
+    StateNotifierProvider<FavoriteLessonNotifier, List<Lesson>>(
         (ref) => FavoriteLessonNotifier());

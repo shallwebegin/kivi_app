@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kivi_app/screens/splash.dart';
-import 'package:kivi_app/screens/start_screen.dart';
+import 'package:kivi_app/screens/admin.dart';
+import 'package:kivi_app/screens/lottie.dart';
+
 import 'firebase_options.dart';
 
 void main() async {
@@ -19,14 +20,14 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'KiviApp',
+      title: 'SpaceQuiz',
       theme: ThemeData(
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(
             brightness: Brightness.dark,
             seedColor: Colors.blue,
           )),
-      home: const SplashScreen(),
+      home: const LottieAnimation(),
     );
   }
 }

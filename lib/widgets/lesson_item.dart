@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:kivi_app/models/ders.dart';
+import 'package:kivi_app/models/lessons.dart';
 import 'package:kivi_app/widgets/lesson_item_trait.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class LessonItem extends StatelessWidget {
   const LessonItem({
     super.key,
-    required this.ders,
+    required this.lesson,
     required this.onPickLesson,
   });
 
-  final Ders ders;
-  final void Function(Ders ders) onPickLesson;
+  final Lesson lesson;
+  final void Function(Lesson lesson) onPickLesson;
 
   String get complexityText {
-    return ders.complexity.name[0].toUpperCase() +
-        ders.complexity.name.substring(1);
+    return lesson.complexity.name[0].toUpperCase() +
+        lesson.complexity.name.substring(1);
   }
 
   @override
@@ -29,13 +29,13 @@ class LessonItem extends StatelessWidget {
       elevation: 2,
       child: InkWell(
         onTap: () {
-          onPickLesson(ders);
+          onPickLesson(lesson);
         },
         child: Stack(
           children: [
             FadeInImage(
               placeholder: MemoryImage(kTransparentImage),
-              image: NetworkImage(ders.imageUrl),
+              image: NetworkImage(lesson.imageUrl),
               fit: BoxFit.cover,
               height: 200,
               width: double.infinity,
@@ -51,7 +51,7 @@ class LessonItem extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      ders.title,
+                      lesson.title,
                       maxLines: 2,
                       textAlign: TextAlign.center,
                       softWrap: true,
@@ -68,7 +68,7 @@ class LessonItem extends StatelessWidget {
                       children: [
                         LessonItemTrait(
                           icon: Icons.schedule,
-                          label: '${ders.duration} min',
+                          label: '${lesson.duration} min',
                         ),
                         const SizedBox(width: 12),
                         LessonItemTrait(

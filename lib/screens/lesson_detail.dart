@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:kivi_app/models/lessons.dart';
 
-import 'package:kivi_app/models/ders.dart';
 import 'package:kivi_app/providers/favorite_provider.dart';
 
 class LessonDetailScreen extends ConsumerWidget {
   const LessonDetailScreen({
     super.key,
-    required this.ders,
+    required this.lesson,
   });
 
-  final Ders ders;
+  final Lesson lesson;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final favoriteLessons = ref.watch(favoriteProvider);
 
-    final isFavorite = favoriteLessons.contains(ders);
+    final isFavorite = favoriteLessons.contains(lesson);
 
     return Scaffold(
-      appBar: AppBar(title: Text(ders.title), actions: [
+      appBar: AppBar(title: Text(lesson.title), actions: [
         IconButton(
           onPressed: () {
             final wasAdded = ref
                 .read(favoriteProvider.notifier)
-                .toggleLessonFavoriteStatus(ders);
+                .toggleLessonFavoriteStatus(lesson);
             ScaffoldMessenger.of(context).clearSnackBars();
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -41,7 +41,7 @@ class LessonDetailScreen extends ConsumerWidget {
         child: Column(
           children: [
             Image.network(
-              ders.imageUrl,
+              lesson.imageUrl,
               height: 300,
               width: double.infinity,
               fit: BoxFit.cover,
@@ -55,11 +55,11 @@ class LessonDetailScreen extends ConsumerWidget {
                   ),
             ),
             const SizedBox(height: 14),
-            for (final ingredient in ders.sorular)
+            for (final question in lesson.question)
               Text(
                 textAlign: TextAlign.center,
                 softWrap: true,
-                ingredient,
+                question,
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: Theme.of(context).colorScheme.onBackground,
                     ),
@@ -75,14 +75,14 @@ class LessonDetailScreen extends ConsumerWidget {
                   ),
             ),
             const SizedBox(height: 14),
-            for (final step in ders.cevaplar)
+            for (final answer in lesson.answer)
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 12,
                   vertical: 8,
                 ),
                 child: Text(
-                  step,
+                  answer,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         color: Theme.of(context).colorScheme.onBackground,

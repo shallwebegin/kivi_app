@@ -10,12 +10,6 @@ import 'package:kivi_app/screens/filters.dart';
 import 'package:kivi_app/screens/lesson.dart';
 import 'package:kivi_app/widgets/main_drawer.dart';
 
-const kInitialFilters = {
-  Filters.zor: false,
-  Filters.orta: false,
-  Filters.kolay: false,
-};
-
 class TabsScreen extends ConsumerStatefulWidget {
   const TabsScreen({super.key});
 
@@ -74,7 +68,7 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
     if (_selectedPageIndex == 1) {
       final favoriteLesson = ref.watch(favoriteProvider);
       activePage = LessonScreen(
-        dersler: favoriteLesson,
+        lessons: favoriteLesson,
       );
       activePageTitle = 'Your Favorites';
     }

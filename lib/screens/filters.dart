@@ -52,7 +52,7 @@ class FiltersScreen extends ConsumerWidget {
                   ),
             ),
             subtitle: Text(
-              'Orta.',
+              'Orta',
               style: Theme.of(context).textTheme.labelMedium!.copyWith(
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
