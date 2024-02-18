@@ -65,68 +65,58 @@ class AdminScreen extends StatelessWidget {
                   height: 20,
                 ),
                 Container(
+                  height: 60,
+                  width: double.infinity,
                   decoration: BoxDecoration(
                     border: Border.all(
                       width: 1,
                       color: Colors.white.withOpacity(0.2),
                     ),
                   ),
-                  height: 250,
-                  width: 400,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Admin Operations',
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Icon(
-                        Icons.admin_panel_settings,
-                        size: 40,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              _showAddLessonModal(context);
-                            },
-                            child: const Text('Add Lesson'),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              _showDeleteLessonModal(context);
-                            },
-                            child: const Text('Delete Lesson'),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (context) => const AllUsersScreen(),
-                                ),
-                              );
-                            },
-                            child: const Text('Delete User'),
-                          ),
-                        ],
-                      ),
-                    ],
+                  child: ListTile(
+                    leading: const Icon(Icons.add),
+                    title: const Text('Add Lesson'),
+                    onTap: () {
+                      _showAddLessonModal(context);
+                    },
+                  ),
+                ),
+                Container(
+                  height: 60,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 1,
+                      color: Colors.white.withOpacity(0.2),
+                    ),
+                  ),
+                  child: ListTile(
+                    leading: const Icon(Icons.delete),
+                    title: const Text('Delete Lesson'),
+                    onTap: () {
+                      _showDeleteLessonModal(context);
+                    },
+                  ),
+                ),
+                Container(
+                  height: 60,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 1,
+                      color: Colors.white.withOpacity(0.2),
+                    ),
+                  ),
+                  child: ListTile(
+                    leading: const Icon(Icons.account_circle),
+                    title: const Text('Delete User'),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const AllUsersScreen(),
+                        ),
+                      );
+                    },
                   ),
                 ),
                 const SizedBox(
