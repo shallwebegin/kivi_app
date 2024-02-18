@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kivi_app/models/lessons.dart';
+import 'package:kivi_app/screens/all_users_screen.dart';
 import 'package:kivi_app/screens/credential.dart';
 
 import 'package:kivi_app/widgets/admin_add_lesson.dart';
-import 'package:kivi_app/widgets/all_users_screen.dart';
 
 final _firebase = FirebaseAuth.instance;
 
@@ -65,62 +65,74 @@ class AdminScreen extends StatelessWidget {
                   height: 20,
                 ),
                 Container(
-                  height: 60,
-                  width: double.infinity,
                   decoration: BoxDecoration(
                     border: Border.all(
                       width: 1,
                       color: Colors.white.withOpacity(0.2),
                     ),
                   ),
-                  child: ListTile(
-                    leading: const Icon(Icons.add),
-                    title: const Text('Add Lesson'),
-                    onTap: () {
-                      _showAddLessonModal(context);
-                    },
+                  height: 60,
+                  width: double.infinity,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ListTile(
+                        leading: const Icon(Icons.add),
+                        title: const Text('Add Lesson'),
+                        onTap: () {
+                          _showAddLessonModal(context);
+                        },
+                      ),
+                    ],
                   ),
                 ),
                 Container(
-                  height: 60,
-                  width: double.infinity,
                   decoration: BoxDecoration(
                     border: Border.all(
                       width: 1,
                       color: Colors.white.withOpacity(0.2),
                     ),
                   ),
-                  child: ListTile(
-                    leading: const Icon(Icons.delete),
-                    title: const Text('Delete Lesson'),
-                    onTap: () {
-                      _showDeleteLessonModal(context);
-                    },
+                  height: 60,
+                  width: double.infinity,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ListTile(
+                        leading: const Icon(Icons.delete),
+                        title: const Text('Delete Lesson'),
+                        onTap: () {
+                          _showDeleteLessonModal(context);
+                        },
+                      ),
+                    ],
                   ),
                 ),
                 Container(
-                  height: 60,
-                  width: double.infinity,
                   decoration: BoxDecoration(
                     border: Border.all(
                       width: 1,
                       color: Colors.white.withOpacity(0.2),
                     ),
                   ),
-                  child: ListTile(
-                    leading: const Icon(Icons.account_circle),
-                    title: const Text('Delete User'),
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const AllUsersScreen(),
-                        ),
-                      );
-                    },
+                  height: 60,
+                  width: double.infinity,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ListTile(
+                        leading: const Icon(Icons.account_box),
+                        title: const Text('Delete User'),
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const AllUsersScreen(),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
                 ),
               ],
             ),

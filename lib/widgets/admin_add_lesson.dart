@@ -19,6 +19,10 @@ class _AdminAddLessonState extends State<AdminAddLesson> {
   late List<String> answer;
   late List<String> categories;
   late Complexity complexity = Complexity.zor;
+
+  late bool kolay;
+  late bool orta;
+  late bool zor;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -113,6 +117,7 @@ class _AdminAddLessonState extends State<AdminAddLesson> {
                 },
               ),
               DropdownButtonFormField(
+                decoration: const InputDecoration(labelText: 'Zorluk'),
                 value: complexity,
                 items: Complexity.values
                     .map(
@@ -130,6 +135,9 @@ class _AdminAddLessonState extends State<AdminAddLesson> {
                 onSaved: (value) {
                   complexity = value!;
                 },
+              ),
+              const SizedBox(
+                height: 10,
               ),
               Row(
                 children: [
@@ -150,6 +158,9 @@ class _AdminAddLessonState extends State<AdminAddLesson> {
                       }
                     },
                     child: const Text('Add Lesson'),
+                  ),
+                  const SizedBox(
+                    width: 5,
                   ),
                   ElevatedButton(
                     onPressed: () {

@@ -3,8 +3,8 @@ import 'package:kivi_app/providers/lesson_provider.dart';
 
 enum Filters { zor, orta, kolay }
 
-class FilterLessonNotifier extends StateNotifier<Map<Filters, bool>> {
-  FilterLessonNotifier()
+class FilterLessonProvider extends StateNotifier<Map<Filters, bool>> {
+  FilterLessonProvider()
       : super({
           Filters.zor: false,
           Filters.orta: false,
@@ -15,20 +15,17 @@ class FilterLessonNotifier extends StateNotifier<Map<Filters, bool>> {
   }
 
   void setFilter(Filters filter, bool isActive) {
-    state = {
-      ...state,
-      filter: isActive,
-    };
+    state = {...state, filter: isActive};
   }
 }
 
 final filterProvider =
-    StateNotifierProvider<FilterLessonNotifier, Map<Filters, bool>>(
-        (ref) => FilterLessonNotifier());
+    StateNotifierProvider<FilterLessonProvider, Map<Filters, bool>>(
+        (ref) => FilterLessonProvider());
 final filteredLessonProvider = Provider((ref) {
-  final lessons = ref.watch(lessonProvider);
+  final lesson = ref.watch(lessonProvider);
   final activeFilters = ref.watch(filterProvider);
-  return lessons.where((lesson) {
+  return lesson.where((lesson) {
     if (activeFilters[Filters.zor]! && !lesson.zor!) {
       return false;
     }
