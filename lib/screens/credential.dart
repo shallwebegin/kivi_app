@@ -53,6 +53,13 @@ class _CredentialScreenState extends State<CredentialScreen> {
                   isManager ? const AdminScreen() : const TabsScreen(),
             ),
           );
+          ScaffoldMessenger.of(context).clearSnackBars();
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Login Successful'),
+              backgroundColor: Colors.green,
+            ),
+          );
         }
       } else {
         final userCredential = await FirebaseAuth.instance
@@ -75,6 +82,13 @@ class _CredentialScreenState extends State<CredentialScreen> {
           'email': _enteredEmail,
           'image_url': imageUrl,
         });
+        ScaffoldMessenger.of(context).clearSnackBars();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Membership successful'),
+            backgroundColor: Colors.green,
+          ),
+        );
       }
     } on FirebaseAuthException catch (error) {
       if (error.code == 'email-already-in-use' ||
@@ -86,6 +100,7 @@ class _CredentialScreenState extends State<CredentialScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(error.message ?? 'Authentication Failed'),
+          backgroundColor: Colors.red,
         ),
       );
     } finally {

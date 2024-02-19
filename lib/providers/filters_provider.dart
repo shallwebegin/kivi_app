@@ -23,16 +23,16 @@ final filterProvider =
     StateNotifierProvider<FilterLessonProvider, Map<Filters, bool>>(
         (ref) => FilterLessonProvider());
 final filteredLessonProvider = Provider((ref) {
-  final lesson = ref.watch(lessonProvider);
+  final lesson = ref.watch(lessonNotifierProvider);
   final activeFilters = ref.watch(filterProvider);
   return lesson.where((lesson) {
-    if (activeFilters[Filters.zor]! && !lesson.zor!) {
+    if (activeFilters[Filters.zor]! && !lesson.zor) {
       return false;
     }
-    if (activeFilters[Filters.orta]! && !lesson.orta!) {
+    if (activeFilters[Filters.orta]! && !lesson.orta) {
       return false;
     }
-    if (activeFilters[Filters.kolay]! && !lesson.kolay!) {
+    if (activeFilters[Filters.kolay]! && !lesson.kolay) {
       return false;
     }
     return true;

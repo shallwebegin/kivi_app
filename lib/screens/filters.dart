@@ -29,14 +29,6 @@ class FiltersScreen extends ConsumerWidget {
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
             ),
-            subtitle: Text(
-              'Zor',
-              style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
-            ),
-            activeColor: Theme.of(context).colorScheme.tertiary,
-            contentPadding: const EdgeInsets.only(left: 34, right: 22),
           ),
           SwitchListTile(
             value: activeFilters[Filters.orta]!,
@@ -51,14 +43,6 @@ class FiltersScreen extends ConsumerWidget {
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
             ),
-            subtitle: Text(
-              'Orta',
-              style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
-            ),
-            activeColor: Theme.of(context).colorScheme.tertiary,
-            contentPadding: const EdgeInsets.only(left: 34, right: 22),
           ),
           SwitchListTile(
             value: activeFilters[Filters.kolay]!,
@@ -73,14 +57,6 @@ class FiltersScreen extends ConsumerWidget {
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
             ),
-            subtitle: Text(
-              'Kolay',
-              style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
-            ),
-            activeColor: Theme.of(context).colorScheme.tertiary,
-            contentPadding: const EdgeInsets.only(left: 34, right: 22),
           ),
         ],
       ),

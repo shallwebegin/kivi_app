@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:kivi_app/data/lesson_data.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:kivi_app/data/category_data.dart';
 
 import 'package:kivi_app/models/lessons.dart';
+import 'package:kivi_app/providers/filters_provider.dart';
 
 import 'package:kivi_app/screens/lesson.dart';
 import 'package:kivi_app/widgets/category_grid_item.dart';
 
-class CategoriesScreen extends StatelessWidget {
+class CategoriesScreen extends ConsumerStatefulWidget {
   const CategoriesScreen({
     super.key,
     required this.availableLesson,
@@ -16,19 +18,16 @@ class CategoriesScreen extends StatelessWidget {
   final List<Lesson> availableLesson;
 
   @override
+  ConsumerState<CategoriesScreen> createState() => _CategoriesScreenState();
+}
+
+class _CategoriesScreenState extends ConsumerState<CategoriesScreen> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          Opacity(
-            opacity: 0,
-            child: Image.asset(
-              'assets/images/pngegg.png',
-              height: double.infinity,
-              fit: BoxFit.cover,
-            ),
-          ),
           StreamBuilder<QuerySnapshot>(
             stream:
                 FirebaseFirestore.instance.collection('lessons').snapshots(),
@@ -52,20 +51,15 @@ class CategoriesScreen extends StatelessWidget {
                   title: data['title'],
                   imageUrl: data['imageUrl'],
                   duration: data['duration'],
-                  complexity: Complexity.zor,
-                  question: List<String>.from(data['sorular']),
-                  answer: List<String>.from(data['cevaplar']),
+                  complexity: data['complexity'].toString(),
+                  question: List<String>.from(data['question']),
+                  answer: List<String>.from(data['answer']),
+                  categories: List<String>.from(data['categories']),
                   zor: data['zor'],
                   orta: data['orta'],
                   kolay: data['kolay'],
-                  categories: List<String>.from(data['categories']),
                 );
               }).toList();
-
-              final mergedLessonList = [
-                ...availableLesson,
-                ...firebaseLessonList
-              ];
 
               return GridView(
                 padding: const EdgeInsets.only(top: 120),
@@ -80,7 +74,9 @@ class CategoriesScreen extends StatelessWidget {
                     CategoryGridItem(
                       category: category,
                       onSelectCategory: () {
-                        final filteredLesson = mergedLessonList
+                        final firebaseLessonList =
+                            ref.watch(filteredLessonProvider);
+                        final filteredLesson = firebaseLessonList
                             .where((lesson) =>
                                 lesson.categories.contains(category.id))
                             .toList();

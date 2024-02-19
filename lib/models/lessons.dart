@@ -4,6 +4,19 @@ enum Complexity {
   zor,
 }
 
+extension ComplexityStringExtension on Complexity {
+  String get complexityString {
+    switch (this) {
+      case Complexity.kolay:
+        return 'kolay';
+      case Complexity.orta:
+        return 'orta';
+      case Complexity.zor:
+        return 'zor';
+    }
+  }
+}
+
 class Lesson {
   const Lesson({
     required this.id,
@@ -14,9 +27,9 @@ class Lesson {
     required this.answer,
     required this.duration,
     required this.complexity,
-    this.zor,
-    this.orta,
-    this.kolay,
+    required this.zor,
+    required this.orta,
+    required this.kolay,
   });
 
   final String id;
@@ -26,9 +39,8 @@ class Lesson {
   final List<String> question;
   final List<String> answer;
   final int duration;
-  final Complexity complexity;
-
-  final bool? zor;
-  final bool? orta;
-  final bool? kolay;
+  final String complexity;
+  final bool zor;
+  final bool orta;
+  final bool kolay;
 }

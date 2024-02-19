@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kivi_app/screens/admin.dart';
-import 'package:kivi_app/screens/categories.dart';
-import 'package:kivi_app/screens/lottie.dart';
+
 import 'package:kivi_app/screens/tabs.dart';
-import 'package:lottie/lottie.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -24,12 +22,13 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'SpaceQuizbank',
       theme: ThemeData(
-          useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(
-            brightness: Brightness.dark,
-            seedColor: Colors.blue,
-          )),
-      home: const AdminScreen(),
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          brightness: Brightness.dark,
+          seedColor: Colors.blue,
+        ),
+      ),
+      home: const TabsScreen(),
     );
   }
 }

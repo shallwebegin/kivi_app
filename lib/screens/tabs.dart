@@ -3,7 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kivi_app/providers/favorite_provider.dart';
-import 'package:kivi_app/providers/filter_provider.dart';
+
+import 'package:kivi_app/providers/filters_provider.dart';
 import 'package:kivi_app/screens/categories.dart';
 import 'package:kivi_app/screens/credential.dart';
 import 'package:kivi_app/screens/filters.dart';
@@ -21,22 +22,24 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
   int _selectedPageIndex = 0;
 
   void _selectPage(int index) {
-    setState(() {
-      _selectedPageIndex = index;
-      if (index == 1) {
-        final favoriteLesson = ref.watch(favoriteProvider);
-        addFavoriteToFirestore(
-          FirebaseAuth.instance.currentUser!.uid,
-          favoriteLesson.map((lesson) => lesson.id).toList(),
-        );
-      }
-    });
+    setState(
+      () {
+        _selectedPageIndex = index;
+        if (index == 1) {
+          final favoriteLesson = ref.watch(favoriteProvider);
+          addFavoriteToFirestore(
+            FirebaseAuth.instance.currentUser!.uid,
+            favoriteLesson.map((lesson) => lesson.id).toList(),
+          );
+        }
+      },
+    );
   }
 
   void _setScreen(String identifier) async {
     Navigator.of(context).pop();
     if (identifier == 'Filters') {
-      await Navigator.of(context).push<Map<Filter, bool>>(
+      await Navigator.of(context).push<Map<Filters, bool>>(
         MaterialPageRoute(
           builder: (ctx) => const FiltersScreen(),
         ),

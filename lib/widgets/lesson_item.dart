@@ -14,8 +14,7 @@ class LessonItem extends StatelessWidget {
   final void Function(Lesson lesson) onPickLesson;
 
   String get complexityText {
-    return lesson.complexity.name[0].toUpperCase() +
-        lesson.complexity.name.substring(1);
+    return lesson.complexity[0].toUpperCase() + lesson.complexity.substring(1);
   }
 
   @override

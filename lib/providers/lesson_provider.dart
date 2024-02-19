@@ -1,5 +1,39 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:kivi_app/data/lesson_data.dart';
+import 'package:kivi_app/models/lessons.dart';
 
-final lessonProvider = Provider((ref) => lessonSubject);
+class LessonNotifier extends StateNotifier<List<Lesson>> {
+  LessonNotifier() : super([]) {
+    fetchLessonsFromFirestore();
+  }
+  void fetchLessonsFromFirestore() async {
+    try {
+      QuerySnapshot snapshot =
+          await FirebaseFirestore.instance.collection('lessons').get();
+      List<Lesson> lessons = snapshot.docs
+          .map((doc) => Lesson(
+                id: doc['id'],
+                categories: List<String>.from(doc['categories']),
+                title: doc['title'],
+                imageUrl: doc['imageUrl'],
+                duration: doc['duration'],
+                complexity: doc['complexity'].toString(),
+                question: List<String>.from(doc['question']),
+                answer: List<String>.from(doc['answer']),
+                zor: doc['zor'],
+                orta: doc['orta'],
+                kolay: doc['kolay'],
+              ))
+          .toList();
+
+      state = [...state, ...lessons];
+    } catch (error) {
+      print('Error fetching lessons: $error');
+    }
+  }
+}
+
+final lessonNotifierProvider =
+    StateNotifierProvider<LessonNotifier, List<Lesson>>(
+        (ref) => LessonNotifier());

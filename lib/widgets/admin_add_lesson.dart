@@ -18,11 +18,12 @@ class _AdminAddLessonState extends State<AdminAddLesson> {
   late List<String> question;
   late List<String> answer;
   late List<String> categories;
-  late Complexity complexity = Complexity.zor;
+  late String complexity = Complexity.zor.complexityString;
 
-  late bool kolay;
-  late bool orta;
-  late bool zor;
+  late bool zor = false;
+  late bool orta = false;
+  late bool kolay = false;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -122,7 +123,7 @@ class _AdminAddLessonState extends State<AdminAddLesson> {
                 items: Complexity.values
                     .map(
                       (complexity) => DropdownMenuItem(
-                        value: complexity,
+                        value: complexity.complexityString,
                         child: Text(complexity.name.toString()),
                       ),
                     )
@@ -136,6 +137,56 @@ class _AdminAddLessonState extends State<AdminAddLesson> {
                   complexity = value!;
                 },
               ),
+              DropdownButtonFormField<String>(
+                decoration: const InputDecoration(labelText: 'Ders Zorluğu'),
+                value: 'Zor',
+                items: const [
+                  DropdownMenuItem<String>(
+                    value: 'Zor',
+                    child: Text('Zor'),
+                  ),
+                  DropdownMenuItem<String>(
+                    value: 'Orta',
+                    child: Text('Orta'),
+                  ),
+                  DropdownMenuItem<String>(
+                    value: 'Kolay',
+                    child: Text('Kolay'),
+                  ),
+                ],
+                onChanged: (value) {
+                  setState(() {
+                    if (value == 'Zor') {
+                      zor = true;
+                      orta = false;
+                      kolay = false;
+                    } else if (value == 'Orta') {
+                      zor = false;
+                      orta = true;
+                      kolay = false;
+                    } else {
+                      zor = false;
+                      orta = false;
+                      kolay = true;
+                    }
+                  });
+                },
+                onSaved: (value) {
+                  if (value == 'Zor') {
+                    zor = true;
+                    orta = false;
+                    kolay = false;
+                  } else if (value == 'Orta') {
+                    zor = false;
+                    orta = true;
+                    kolay = false;
+                  } else {
+                    zor = false;
+                    orta = false;
+                    kolay = true;
+                  }
+                },
+              ),
               const SizedBox(
                 height: 10,
               ),
@@ -146,14 +197,18 @@ class _AdminAddLessonState extends State<AdminAddLesson> {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
                         final lesson = Lesson(
-                            id: id,
-                            categories: categories,
-                            title: title,
-                            imageUrl: imageUrl,
-                            question: question,
-                            answer: answer,
-                            duration: duration,
-                            complexity: complexity);
+                          id: id,
+                          categories: categories,
+                          title: title,
+                          imageUrl: imageUrl,
+                          question: question,
+                          answer: answer,
+                          duration: duration,
+                          complexity: complexity,
+                          zor: zor,
+                          orta: orta,
+                          kolay: kolay,
+                        );
                         widget.onLessonSubmitted(lesson);
                       }
                     },
