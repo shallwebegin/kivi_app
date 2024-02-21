@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -29,7 +30,7 @@ class LessonNotifier extends StateNotifier<List<Lesson>> {
 
       state = [...state, ...lessons];
     } catch (error) {
-      print('Error fetching lessons: $error');
+      Text('Error fetching lessons: $error');
     }
   }
 }

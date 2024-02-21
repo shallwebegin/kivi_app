@@ -118,7 +118,7 @@ class _AdminAddLessonState extends State<AdminAddLesson> {
                 },
               ),
               DropdownButtonFormField(
-                decoration: const InputDecoration(labelText: 'Zorluk'),
+                decoration: const InputDecoration(labelText: 'Complexity'),
                 value: complexity,
                 items: Complexity.values
                     .map(
@@ -138,7 +138,8 @@ class _AdminAddLessonState extends State<AdminAddLesson> {
                 },
               ),
               DropdownButtonFormField<String>(
-                decoration: const InputDecoration(labelText: 'Ders Zorluğu'),
+                decoration: const InputDecoration(
+                    labelText: 'Difficulty of the lesson'),
                 value: 'Zor',
                 items: const [
                   DropdownMenuItem<String>(

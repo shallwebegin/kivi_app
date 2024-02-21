@@ -24,12 +24,11 @@ class _CredentialScreenState extends State<CredentialScreen> {
   var _enteredEmail = '';
   var _enteredPassword = '';
   var _enteredUsername = '';
-
   var isAuthentication = false;
   var isManager = false;
   File? pickedImage;
 
-  void credentialUser() async {
+  Future<void> credentialUser() async {
     final isValid = _form.currentState!.validate();
     if (!isValid) {
       return;

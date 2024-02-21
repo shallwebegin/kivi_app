@@ -67,9 +67,11 @@ class _AllUsersScreenState extends State<AllUsersScreen> {
                     title: Text(userName),
                     subtitle: Text(emailAddress),
                     trailing: IconButton(
-                      icon: const Icon(Icons.delete),
-                      onPressed: () => _deleteUser(context, user.id),
-                    ),
+                        icon: const Icon(Icons.delete),
+                        onPressed: () {
+                          _showUserDeleteModal(
+                              context, 'Delete User', 'Are you sure?', user.id);
+                        }),
                   );
                 },
               );
@@ -77,6 +79,34 @@ class _AllUsersScreenState extends State<AllUsersScreen> {
           }
         },
       ),
+    );
+  }
+
+  void _showUserDeleteModal(
+      BuildContext context, String title, String message, String userId) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () async {
+                await _deleteUser(context, userId);
+                Navigator.of(context).pop();
+              },
+              child: const Text('Sure'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Cancel'),
+            ),
+          ],
+        );
+      },
     );
   }
 

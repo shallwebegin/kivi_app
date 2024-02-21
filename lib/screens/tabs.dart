@@ -36,7 +36,7 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
     );
   }
 
-  void _setScreen(String identifier) async {
+  Future<void> _setScreen(String identifier) async {
     Navigator.of(context).pop();
     if (identifier == 'Filters') {
       await Navigator.of(context).push<Map<Filters, bool>>(

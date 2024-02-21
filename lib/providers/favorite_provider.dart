@@ -4,8 +4,8 @@ import 'package:kivi_app/models/lessons.dart';
 class FavoriteLessonNotifier extends StateNotifier<List<Lesson>> {
   FavoriteLessonNotifier() : super([]);
   bool toggleLessonFavoriteStatus(Lesson lesson) {
-    final dersIsFavorite = state.contains(lesson);
-    if (dersIsFavorite) {
+    final lesonIsFavorite = state.contains(lesson);
+    if (lesonIsFavorite) {
       state = state.where((l) => l.id != lesson.id).toList();
       return false;
     } else {

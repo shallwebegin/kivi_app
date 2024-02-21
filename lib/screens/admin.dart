@@ -170,7 +170,8 @@ class AdminScreen extends StatelessWidget {
               }).catchError((error) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text('Ders eklenirken hata oluştu: $error'),
+                    content: Text(
+                        'An error occurred while adding the lesson: $error'),
                     backgroundColor: Colors.red,
                   ),
                 );
@@ -204,8 +205,9 @@ class AdminScreen extends StatelessWidget {
               child: const Text('Cancel'),
             ),
             TextButton(
-              onPressed: () {
-                _deleteLesson(lessonTitle, context);
+              onPressed: () async {
+                await _deleteLesson(lessonTitle, context);
+                Navigator.of(context).pop();
               },
               child: const Text('Delete'),
             ),
@@ -215,7 +217,7 @@ class AdminScreen extends StatelessWidget {
     );
   }
 
-  void _deleteLesson(String lessonTitle, BuildContext context) async {
+  Future<void> _deleteLesson(String lessonTitle, BuildContext context) async {
     try {
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance
           .collection('lessons')
@@ -230,14 +232,15 @@ class AdminScreen extends StatelessWidget {
 
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Ders başarıyla silindi.'),
+            content: Text('The lesson has been successfully deleted.'),
             backgroundColor: Colors.green,
           ),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Belirtilen isme sahip ders bulunamadı.'),
+            content:
+                Text('The lesson with the specified name could not be found.'),
             backgroundColor: Colors.orange,
           ),
         );
@@ -245,7 +248,7 @@ class AdminScreen extends StatelessWidget {
     } catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Ders silinirken hata oluştu.'),
+          content: Text('An error occurred while deleting the lesson.'),
           backgroundColor: Colors.red,
         ),
       );

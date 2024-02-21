@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -39,7 +41,7 @@ class _CategoriesScreenState extends ConsumerState<CategoriesScreen> {
               }
               if (snapshot.hasError) {
                 return Center(
-                  child: Text('Bir hata oluştu: ${snapshot.error}'),
+                  child: Text('Error: ${snapshot.error}'),
                 );
               }
 

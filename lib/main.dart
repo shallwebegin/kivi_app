@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kivi_app/screens/admin.dart';
 
-import 'package:kivi_app/screens/tabs.dart';
+import 'package:kivi_app/screens/lottie.dart';
+
 import 'firebase_options.dart';
 
 void main() async {
@@ -28,7 +28,7 @@ class App extends StatelessWidget {
           seedColor: Colors.blue,
         ),
       ),
-      home: const TabsScreen(),
+      home: const LottieAnimation(),
     );
   }
 }
