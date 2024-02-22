@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:kivi_app/models/lessons.dart';
 
-class AdminAddLesson extends StatefulWidget {
-  const AdminAddLesson({super.key, required this.onLessonSubmitted});
+class AdminOperations extends StatefulWidget {
+  const AdminOperations({super.key, required this.onLessonSubmitted});
   final void Function(Lesson lesson) onLessonSubmitted;
 
   @override
-  State<AdminAddLesson> createState() => _AdminAddLessonState();
+  State<AdminOperations> createState() => _AdminOperationsState();
 }
 
-class _AdminAddLessonState extends State<AdminAddLesson> {
+class _AdminOperationsState extends State<AdminOperations> {
   final _formKey = GlobalKey<FormState>();
   late String id;
   late String title;

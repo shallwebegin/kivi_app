@@ -8,7 +8,7 @@ import 'package:kivi_app/models/lessons.dart';
 import 'package:kivi_app/screens/all_users_screen.dart';
 import 'package:kivi_app/screens/credential.dart';
 
-import 'package:kivi_app/widgets/admin_add_lesson.dart';
+import 'package:kivi_app/widgets/admin_operations.dart';
 
 final _firebase = FirebaseAuth.instance;
 
@@ -163,7 +163,7 @@ class AdminScreen extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return Dialog(
-          child: AdminAddLesson(
+          child: AdminOperations(
             onLessonSubmitted: (lesson) {
               addLessonToFirestore(lesson).then((_) {
                 Navigator.of(context).pop();
