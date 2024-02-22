@@ -8,7 +8,7 @@ class LessonNotifier extends StateNotifier<List<Lesson>> {
   LessonNotifier() : super([]) {
     fetchLessonsFromFirestore();
   }
-  void fetchLessonsFromFirestore() async {
+  Future<void> fetchLessonsFromFirestore() async {
     try {
       QuerySnapshot snapshot =
           await FirebaseFirestore.instance.collection('lessons').get();
