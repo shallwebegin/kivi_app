@@ -2,14 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kivi_app/providers/favorite_provider.dart';
+import 'package:space_quiz_bank/providers/favorite_provider.dart';
 
-import 'package:kivi_app/providers/filters_provider.dart';
-import 'package:kivi_app/screens/categories.dart';
-import 'package:kivi_app/screens/credential.dart';
-import 'package:kivi_app/screens/filters.dart';
-import 'package:kivi_app/screens/lesson.dart';
-import 'package:kivi_app/widgets/main_drawer.dart';
+import 'package:space_quiz_bank/providers/filters_provider.dart';
+import 'package:space_quiz_bank/screens/categories.dart';
+import 'package:space_quiz_bank/screens/credential.dart';
+import 'package:space_quiz_bank/screens/filters.dart';
+import 'package:space_quiz_bank/screens/lesson.dart';
+
+import 'package:space_quiz_bank/widgets/main_drawer.dart';
 
 class TabsScreen extends ConsumerStatefulWidget {
   const TabsScreen({super.key});
@@ -48,9 +49,7 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
   }
 
   Future<void> addFavoriteToFirestore(
-    String userId,
-    List<String> favoriteLessonIds,
-  ) async {
+      String userId, List<String> favoriteLessonIds) async {
     final firestore = FirebaseFirestore.instance;
     await firestore.collection('favorites').doc(userId).set({
       'email': FirebaseAuth.instance.currentUser!.email,

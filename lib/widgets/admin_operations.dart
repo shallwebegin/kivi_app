@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kivi_app/models/lessons.dart';
+import 'package:space_quiz_bank/models/lessons.dart';
 
 class AdminOperations extends StatefulWidget {
   const AdminOperations({super.key, required this.onLessonSubmitted});
@@ -11,6 +11,7 @@ class AdminOperations extends StatefulWidget {
 
 class _AdminOperationsState extends State<AdminOperations> {
   final _formKey = GlobalKey<FormState>();
+
   late String id;
   late String title;
   late String imageUrl;

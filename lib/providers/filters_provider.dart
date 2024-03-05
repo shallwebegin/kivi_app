@@ -1,15 +1,17 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kivi_app/providers/lesson_provider.dart';
+import 'package:space_quiz_bank/providers/lesson_provider.dart';
 
 enum Filters { zor, orta, kolay }
 
 class FilterLessonProvider extends StateNotifier<Map<Filters, bool>> {
   FilterLessonProvider()
-      : super({
-          Filters.zor: false,
-          Filters.orta: false,
-          Filters.kolay: false,
-        });
+      : super(
+          {
+            Filters.zor: false,
+            Filters.orta: false,
+            Filters.kolay: false,
+          },
+        );
   void setFilters(Map<Filters, bool> choosenFilter) {
     state = choosenFilter;
   }

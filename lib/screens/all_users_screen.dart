@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:kivi_app/screens/admin.dart';
+import 'package:space_quiz_bank/screens/admin.dart';
 
 class AllUsersScreen extends StatefulWidget {
   const AllUsersScreen({super.key});
@@ -82,6 +82,16 @@ class _AllUsersScreenState extends State<AllUsersScreen> {
     );
   }
 
+  Future<List<DocumentSnapshot>> _getAllUsers() async {
+    try {
+      final querySnapshot =
+          await FirebaseFirestore.instance.collection('users').get();
+      return querySnapshot.docs;
+    } catch (error) {
+      throw 'Error fetching users: $error';
+    }
+  }
+
   void _showUserDeleteModal(
       BuildContext context, String title, String message, String userId) {
     showDialog(
@@ -108,16 +118,6 @@ class _AllUsersScreenState extends State<AllUsersScreen> {
         );
       },
     );
-  }
-
-  Future<List<DocumentSnapshot>> _getAllUsers() async {
-    try {
-      final querySnapshot =
-          await FirebaseFirestore.instance.collection('users').get();
-      return querySnapshot.docs;
-    } catch (error) {
-      throw 'Error fetching users: $error';
-    }
   }
 
   Future<void> _deleteUser(BuildContext context, String userId) async {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:kivi_app/screens/credential.dart';
 import 'package:lottie/lottie.dart';
+import 'package:space_quiz_bank/screens/credential.dart';
 
 class LottieAnimation extends StatefulWidget {
-  const LottieAnimation({Key? key}) : super(key: key);
+  const LottieAnimation({super.key});
 
   @override
   State<LottieAnimation> createState() => _LottieAnimationState();

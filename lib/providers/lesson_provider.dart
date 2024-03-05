@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:kivi_app/models/lessons.dart';
+import 'package:space_quiz_bank/models/lessons.dart';
 
 class LessonNotifier extends StateNotifier<List<Lesson>> {
   LessonNotifier() : super([]) {

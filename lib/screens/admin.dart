@@ -4,11 +4,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:kivi_app/models/lessons.dart';
-import 'package:kivi_app/screens/all_users_screen.dart';
-import 'package:kivi_app/screens/credential.dart';
+import 'package:space_quiz_bank/models/lessons.dart';
+import 'package:space_quiz_bank/screens/all_users_screen.dart';
 
-import 'package:kivi_app/widgets/admin_operations.dart';
+import 'package:space_quiz_bank/widgets/admin_operations.dart';
+import 'package:space_quiz_bank/screens/credential.dart';
 
 final _firebase = FirebaseAuth.instance;
 
@@ -19,24 +19,7 @@ class AdminScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final User? user = _firebase.currentUser;
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-        title: const Text('Admin Page'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () {
-              FirebaseAuth.instance.signOut();
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => const CredentialScreen(),
-                ),
-              );
-            },
-          )
-        ],
-      ),
+      appBar: _appBar(context),
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
@@ -142,8 +125,30 @@ class AdminScreen extends StatelessWidget {
     );
   }
 
-  Future<void> addLessonToFirestore(Lesson lesson) {
-    return FirebaseFirestore.instance.collection('lessons').add({
+  AppBar _appBar(BuildContext context) {
+    const String adminPage = 'Admin Page';
+    return AppBar(
+      automaticallyImplyLeading: false,
+      backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+      title: const Text(adminPage),
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.logout),
+          onPressed: () {
+            FirebaseAuth.instance.signOut();
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => const CredentialScreen(),
+              ),
+            );
+          },
+        )
+      ],
+    );
+  }
+
+  Future<void> addLessonToFirestore(Lesson lesson) async {
+    await FirebaseFirestore.instance.collection('lessons').add({
       'id': lesson.id,
       'categories': lesson.categories,
       'title': lesson.title,
@@ -167,15 +172,17 @@ class AdminScreen extends StatelessWidget {
             onLessonSubmitted: (lesson) {
               addLessonToFirestore(lesson).then((_) {
                 Navigator.of(context).pop();
-              }).catchError((error) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                        'An error occurred while adding the lesson: $error'),
-                    backgroundColor: Colors.red,
-                  ),
-                );
-              });
+              }).catchError(
+                (error) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                          'An error occurred while adding the lesson: $error'),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                },
+              );
             },
           ),
         );

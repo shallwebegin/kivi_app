@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:kivi_app/models/lessons.dart';
-import 'package:kivi_app/screens/lesson_detail.dart';
-import 'package:kivi_app/widgets/lesson_item.dart';
+import 'package:space_quiz_bank/models/lessons.dart';
+import 'package:space_quiz_bank/screens/lesson_detail.dart';
+import 'package:space_quiz_bank/widgets/lesson_item.dart';
 
 class LessonScreen extends StatelessWidget {
   const LessonScreen({super.key, required this.lessons, this.title});

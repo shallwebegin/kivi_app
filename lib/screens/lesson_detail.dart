@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kivi_app/models/lessons.dart';
+import 'package:space_quiz_bank/models/lessons.dart';
 
-import 'package:kivi_app/providers/favorite_provider.dart';
+import 'package:space_quiz_bank/providers/favorite_provider.dart';
 
 class LessonDetailScreen extends ConsumerWidget {
   const LessonDetailScreen({

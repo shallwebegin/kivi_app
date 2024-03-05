@@ -6,10 +6,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:kivi_app/screens/admin.dart';
+import 'package:space_quiz_bank/screens/admin.dart';
+import 'package:space_quiz_bank/screens/tabs.dart';
 
-import 'package:kivi_app/screens/tabs.dart';
-import 'package:kivi_app/widgets/user_image_picker.dart';
+import 'package:space_quiz_bank/widgets/user_image_picker.dart';
 
 class CredentialScreen extends StatefulWidget {
   const CredentialScreen({super.key});
@@ -146,13 +146,6 @@ class _CredentialScreenState extends State<CredentialScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.black, Colors.white],
-                ),
-              ),
-            ),
             Center(
               child: Card(
                 margin: const EdgeInsets.all(12),

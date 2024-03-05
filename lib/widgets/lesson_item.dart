@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kivi_app/models/lessons.dart';
-import 'package:kivi_app/widgets/lesson_item_trait.dart';
+import 'package:space_quiz_bank/models/lessons.dart';
+import 'package:space_quiz_bank/widgets/lesson_item_trait.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class LessonItem extends StatelessWidget {

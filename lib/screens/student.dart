@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:kivi_app/screens/tabs.dart';
+import 'package:space_quiz_bank/screens/tabs.dart';
 
 final _firebase = FirebaseAuth.instance;
 

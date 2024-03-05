@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kivi_app/models/lessons.dart';
+import 'package:space_quiz_bank/models/lessons.dart';
 
 class FavoriteLessonNotifier extends StateNotifier<List<Lesson>> {
   FavoriteLessonNotifier() : super([]);

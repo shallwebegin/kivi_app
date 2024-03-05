@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kivi_app/models/category.dart';
+import 'package:space_quiz_bank/models/category.dart';
 
 const availableCategories = [
   Category(

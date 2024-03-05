@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kivi_app/screens/student.dart';
+import 'package:space_quiz_bank/screens/student.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key, required this.onSelectScreen});
